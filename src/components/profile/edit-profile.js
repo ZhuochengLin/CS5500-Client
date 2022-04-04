@@ -6,18 +6,18 @@ const EditProfile = () => {
       <div className="ttr-edit-profile">
           <div className="border border-bottom-0">
               <Link to="/profile" className="btn btn-light rounded-pill fa-pull-left fw-bolder mt-2 mb-2 ms-2">
-                  <i className="fa fa-close"></i>
+                  <i className="fa fa-close"/>
               </Link>
               <Link to="/profile" className="btn btn-dark rounded-pill fa-pull-right fw-bolder mt-2 mb-2 me-2">
                   Save
               </Link>
               <h4 className="p-2 mb-0 pb-0 fw-bolder">Edit profile</h4>
               <div className="mb-5 position-relative">
-                  <img className="w-100" src="../images/nasa-profile-header.jpg"/>
+                  <img className="w-100" src="../images/nasa-profile-header.jpg" alt=""/>
                   <div className="bottom-0 left-0 position-absolute">
                       <div className="position-relative">
                           <img className="position-relative ttr-z-index-1 ttr-top-40px ttr-width-150px"
-                               src="../images/nasa-3.png"/>
+                               src="../images/nasa-3.png" alt=""/>
                       </div>
                   </div>
               </div>
