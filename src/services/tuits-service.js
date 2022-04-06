@@ -21,8 +21,8 @@ export const findTuitByUser = (uid) =>
     api.get(`${USERS_API}/${uid}/tuits`)
         .then(response => response.data);
 
-export const createTuit = (uid, tid, tuit) =>
-    api.post(`${USERS_API}/${uid}/tuits/${tid}`, tuit)
+export const createTuit = (uid, tuit) =>
+    api.post(`${USERS_API}/${uid}/tuits`, tuit)
         .then(response => response.data);
 
 export const updateTuit = (tid, tuit) =>
