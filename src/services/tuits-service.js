@@ -21,12 +21,12 @@ export const findTuitByUser = (uid) =>
     api.get(`${USERS_API}/${uid}/tuits`)
         .then(response => response.data);
 
-export const createTuit = (uid, tuit) =>
-    api.post(`${USERS_API}/${uid}/tuits`, tuit)
+export const createTuit = (uid, tid, tuit) =>
+    api.post(`${USERS_API}/${uid}/tuits/${tid}`, tuit)
         .then(response => response.data);
 
-export const updateTuit = (tid, tuit) =>
-    api.post(`${TUITS_API}/${tid}`, tuit)
+export const updateTuit = (uid, tid, tuit) =>
+    api.put(`${USERS_API}/${uid}/tuits/${tid}`, tuit)
         .then(response => response.data);
 
 export const deleteTuit = (tid) =>
