@@ -48,13 +48,13 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
           @{tuit.postedBy && tuit.postedBy.username} -
             <span className="ms-1">{daysOld(tuit)}</span></h2>
         {tuit.tuit}
-        {/*{*/}
-        {/*  tuit.video &&*/}
-        {/*    <TuitVideo tuit={tuit}/>*/}
-        {/*}*/}
+        {
+          (tuit.video.length !== 0) &&
+            <TuitVideo tuit={tuit}/>
+        }
         {
         // TODO: Need a "TuitImages" to wrap multiple "TuitImage"
-          tuit.image && <TuitImages tuit={tuit}/>
+          (tuit.image.length !== 0) && <TuitImages tuit={tuit}/>
         }
         <TuitStats tuit={tuit} likeTuit={likeTuit}/>
       </div>
