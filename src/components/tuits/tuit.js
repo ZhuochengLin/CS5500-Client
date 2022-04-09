@@ -1,6 +1,6 @@
 import React from "react";
 import TuitStats from "./tuit-stats";
-import TuitImage from "./tuit-image";
+import TuitImages from "./tuit-images";
 import TuitVideo from "./tuit-video";
 import {Link} from "react-router-dom";
 
@@ -48,14 +48,14 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
           @{tuit.postedBy && tuit.postedBy.username} -
             <span className="ms-1">{daysOld(tuit)}</span></h2>
         {tuit.tuit}
-        {
-          tuit.video &&
-            <TuitVideo tuit={tuit}/>
-        }
+        {/*{*/}
+        {/*  tuit.video &&*/}
+        {/*    <TuitVideo tuit={tuit}/>*/}
+        {/*}*/}
         {
         // TODO: Need a "TuitImages" to wrap multiple "TuitImage"
           tuit.images &&
-          <TuitImage tuit={tuit}/>
+          <TuitImages tuit={tuit}/>
         }
         <TuitStats tuit={tuit} likeTuit={likeTuit}/>
       </div>
