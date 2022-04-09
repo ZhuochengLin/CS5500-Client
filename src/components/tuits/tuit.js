@@ -53,7 +53,6 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
             <TuitVideo tuit={tuit}/>
         }
         {
-        // TODO: Need a "TuitImages" to wrap multiple "TuitImage"
           (tuit.image.length !== 0) && <TuitImages tuit={tuit}/>
         }
         <TuitStats tuit={tuit} likeTuit={likeTuit}/>

@@ -10,7 +10,6 @@ const MyMedia = () => {
     useEffect(findMyMediaTuits, []);
     return(
         <>
-            <h1>Tuits with media should be displayed below</h1>
             <Tuits tuits={mediaTuits}
                    refreshTuits={findMyMediaTuits}/>
         </>
