@@ -54,8 +54,7 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
         {/*}*/}
         {
         // TODO: Need a "TuitImages" to wrap multiple "TuitImage"
-          tuit.images &&
-          <TuitImages tuit={tuit}/>
+          tuit.image && <TuitImages tuit={tuit}/>
         }
         <TuitStats tuit={tuit} likeTuit={likeTuit}/>
       </div>
