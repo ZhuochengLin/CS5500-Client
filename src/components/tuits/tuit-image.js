@@ -1,6 +1,5 @@
 import React from "react";
 const TuitImage = ({image}) => {
-    console.log(image);
   return(
     <div className="position-relative">
       <img src={image}
