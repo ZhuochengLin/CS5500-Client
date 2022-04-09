@@ -3,8 +3,6 @@ import TuitImage from "./tuit-image";
 
 const TuitImages = ({tuit}) => {
     const images = tuit.image || [];
-    console.log(images);
-    console.log(images);
   return(
       <>
           <div>
