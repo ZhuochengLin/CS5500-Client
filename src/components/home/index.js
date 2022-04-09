@@ -5,7 +5,8 @@ import {useEffect, useState} from "react";
 
 const Home = () => {
   const [tuits, setTuits] = useState([]);
-  const [tuit, setTuit] = useState('');
+  const [tuitText, setTuitText] = useState('');
+  const [image, setImage] = useState({});
   const findTuits = () =>
       service.findAllTuits()
         .then(tuits => setTuits(tuits));
@@ -14,9 +15,26 @@ const Home = () => {
     findTuits()
     return () => {isMounted = false;}
   }, []);
-  const createTuit = () =>
-      service.createTuit('my', {tuit})
-          .then(findTuits)
+
+  const createTuit = () => {
+    const tuit = new FormData();
+    tuit.append('image', image);
+    tuit.append('tuit', tuitText);
+    console.log('tuit');
+    console.log(tuit);
+    console.log('image');
+    console.log(image);
+    console.log('tuitText');
+    console.log(tuitText);
+
+    return service.createTuit('my', tuit)
+        .then(findTuits)
+  }
+
+  const uploadFileHandler = (event) =>{
+    setImage(event.target.files[0]);
+  }
+
   return(
     <div className="ttr-home">
       <div className="border border-bottom-0">
@@ -29,7 +47,7 @@ const Home = () => {
           <div className="p-2 w-100">
             <textarea
                 onChange={(e) =>
-                    setTuit(e.target.value)}
+                    setTuitText(e.target.value)}
               placeholder="What's happening?"
               className="w-100 border-0"/>
             <div className="row">
@@ -40,6 +58,7 @@ const Home = () => {
                 <i className="far fa-face-smile me-3"/>
                 <i className="far fa-calendar me-3"/>
                 <i className="far fa-map-location me-3"/>
+                <input type="file" onChange={uploadFileHandler}/>
               </div>
               <div className="col-2">
                 <a onClick={createTuit}
