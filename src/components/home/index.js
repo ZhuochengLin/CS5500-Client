@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 const Home = () => {
   const [tuits, setTuits] = useState([]);
   const [tuitText, setTuitText] = useState('');
-  const [images, setImages] = useState([]);
+  const [files, setFiles] = useState([]);
 
   const findTuits = () =>
       service.findAllTuits()
@@ -19,10 +19,29 @@ const Home = () => {
   }, []);
 
   const createTuit = () => {
-    const tuit = new FormData();
+    if(files.length > 6){
+      window.alert('Only allows 6 media at this moment');
+      return;
+    }
 
-  for(const image of images){
-    tuit.append('image', image);
+    const tuit = new FormData();
+    console.log(files);
+
+  for(const file of files){
+    const fileName = file.name;
+    const fileInfo = fileName.split(".");
+    const format = fileInfo.at(-1).toLowerCase();
+    if(format === 'jpeg' || format === 'png' || format === 'jpg'){
+      console.log('inside image condition');
+      console.log(file);
+      tuit.append('image', file);
+    }else if(format === 'mp4'){
+      console.log('inside video condition');
+      console.log(file);
+      tuit.append('video', file);
+    }else{
+      alert('Please check file format. Images: jpeg/png/jpg; video: mp4');
+    }
   }
 
     tuit.append('tuit', tuitText);
@@ -32,7 +51,7 @@ const Home = () => {
   }
 
   const uploadFileHandler = (event) =>{
-    setImages(event.target.files);
+    setFiles(event.target.files);
   }
 
   return(
