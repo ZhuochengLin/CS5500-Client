@@ -1,7 +1,7 @@
 const TuitsAndReplies = () => {
     return(
         <div>
-            <h1>Tuits and Replies</h1>
+            <h2>Tuits and Replies</h2>
         </div>
     );
 };

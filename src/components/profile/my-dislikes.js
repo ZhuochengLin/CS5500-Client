@@ -1,7 +1,7 @@
 const MyDislikes = () => {
     return(
         <div>
-            <h1>My Dislikes</h1>
+            <h2>My Dislikes</h2>
         </div>
     )
 }

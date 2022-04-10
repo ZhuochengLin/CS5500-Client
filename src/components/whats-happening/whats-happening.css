@@ -1,11 +1,4 @@
-
-.ttr-whats-happening
-.ttr-whats-happening-tuit
-.ttr-user-logo {
-    width: 68px;
-}
-
-.ttr-whats-happening .ttr-search .fas.fa-search {
-    top: 17px;
-    left: 17px;
+.fas.fa-search {
+    top: 1rem;
+    left: 2rem;
 }

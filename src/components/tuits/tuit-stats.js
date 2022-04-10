@@ -2,34 +2,32 @@ import React from "react";
 
 const TuitStats = ({tuit, likeTuit = () => {}}) => {
     return (
-      <div className="row mt-2">
-        <div className="col">
-          <i className="fa fa-message me-1"></i>
-          {tuit.stats &&
-          <span className="ttr-stats-replies">{tuit.stats.replies}</span>
-          }
+      <div className="row m-0 mt-2">
+        <div className="col-3">
+            <div className={"row align-items-center"}>
+                <i className="col fa-regular fa-message pe-0"/>
+                {
+                    tuit.stats &&
+                    <span className={"col ps-0"}>{tuit.stats.replies}</span>
+                }
+            </div>
         </div>
-        <div className="col">
-          <i className="fa fa-retweet me-1"></i>
-          {tuit.stats &&
-          <span className="ttr-stats-retuits">{tuit.stats.retuits}</span>
-          }
+        <div className="col-3">
+            <div className={"row align-items-center"}>
+                <i className="col fa-solid fa-retweet pe-0"/>
+                {tuit.stats &&
+                    <span className="col ps-0">{tuit.stats.retuits}</span>
+                }
+            </div>
         </div>
-        <div className="col">
-          <span className="ttr-like-tuit-click" onClick={() => likeTuit(tuit)}>
-              {
-                tuit.stats.likes > 0 &&
-                  <i className="fa fa-heart me-1" style={{color: 'red'}}></i>
-              }
-              {
-               tuit.stats.likes <= 0 &&
-                  <i className="fa fa-heart me-1"></i>
-              }
-            <span className="ttr-stats-likes">{tuit.stats && tuit.stats.likes}</span>
-          </span>
+        <div className="col-3">
+            <div className={"row align-items-center"}>
+                <i className="col fa-regular fa-heart pe-0"/>
+                <span className="col ps-0">{tuit.stats && tuit.stats.likes}</span>
+            </div>
         </div>
-        <div className="col">
-          <i className="fa fa-share"></i>
+        <div className="col-3">
+          <i className="fa-solid fa-share-from-square"/>
         </div>
       </div>
     );
