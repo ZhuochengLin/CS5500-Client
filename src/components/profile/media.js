@@ -1,8 +1,20 @@
-const Media = () => {
+import {useEffect, useState} from "react";
+import * as service from "../../services/tuits-service";
+import Tuits from "../tuits";
+
+const MyMedia = () => {
+    const [mediaTuits, setMediaTuits] = useState([]);
+    const findMyMediaTuits = () =>
+        service.findTuitsWithMediaByUser("my")
+            .then(tuits => setMediaTuits(tuits));
+    useEffect(findMyMediaTuits, []);
     return(
-        <div>
-            <h1>Media</h1>
-        </div>
+       
+            <Tuits tuits={mediaTuits}
+                   refreshTuits={findMyMediaTuits}/>
+       
+
     );
 };
-export default Media;
+
+export default MyMedia;

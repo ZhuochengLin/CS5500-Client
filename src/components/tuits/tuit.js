@@ -1,6 +1,6 @@
 import React from "react";
 import TuitStats from "./tuit-stats";
-import TuitImage from "./tuit-image";
+import TuitImages from "./tuit-images";
 import TuitVideo from "./tuit-video";
 import {Link} from "react-router-dom";
 
@@ -52,12 +52,11 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
                     </div>
                     <div className={"col-12 mt-2 mb-2"}>
                         {
-                            tuit.video.length > 0 &&
+                            (tuit.video.length !== 0) &&
                             <TuitVideo tuit={tuit}/>
                         }
                         {
-                            tuit.image.length > 0 &&
-                            <TuitImage tuit={tuit}/>
+                            (tuit.image.length !== 0) && <TuitImages tuit={tuit}/>
                         }
                     </div>
                     <div className={"col-12"}>
@@ -65,6 +64,6 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
                     </div>
                 </div>
             </div>
-    );
-}
+    )
+};
 export default Tuit;
