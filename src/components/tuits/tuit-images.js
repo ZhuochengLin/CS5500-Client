@@ -6,8 +6,8 @@ const TuitImages = ({tuit}) => {
   return(
 
           <div>
-              {images && images.map((image) =>
-                  <TuitImage image={image}/>
+              {images && images.map((image, nth) =>
+                  <TuitImage key={nth} image={image}/>
               )}
           </div>
 
