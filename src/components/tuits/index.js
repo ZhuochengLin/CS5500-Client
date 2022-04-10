@@ -1,5 +1,4 @@
 import React from "react";
-import './tuits.css';
 import Tuit from "./tuit";
 import * as likesService from "../../services/likes-service";
 import * as service from "../../services/tuits-service";
@@ -13,18 +12,15 @@ const Tuits = ({tuits = [], refreshTuits}) => {
             .then(refreshTuits);
 
     return (
-        <div>
-          <ul className="ttr-tuits list-group">
+        <>
             {
-              tuits.map && tuits.map(tuit =>
-                  <Tuit className="the-tuit"
-                        key={tuit._id}
-                        deleteTuit={deleteTuit}
-                        likeTuit={likeTuit}
-                        tuit={tuit}/>)
+                tuits.map && tuits.map(tuit =>
+                    <Tuit key={tuit._id}
+                          deleteTuit={deleteTuit}
+                          likeTuit={likeTuit}
+                          tuit={tuit}/>)
             }
-          </ul>
-        </div>
+        </>
       );
 }
 

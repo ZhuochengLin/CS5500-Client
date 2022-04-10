@@ -12,54 +12,59 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
         const postedMillis = posted.getTime();
         const oldMillis = nowMillis - postedMillis;
         let old = 0.0;
-        const secondsOld = oldMillis/1000.0;
-        const minutesOld = secondsOld/60.0;
-        const hoursOld = minutesOld/60.0;
-        const daysOld = hoursOld/24.0;
-        if(daysOld > 1) {
+        const secondsOld = oldMillis / 1000.0;
+        const minutesOld = secondsOld / 60.0;
+        const hoursOld = minutesOld / 60.0;
+        const daysOld = hoursOld / 24.0;
+        if (daysOld > 1) {
             old = Math.round(daysOld) + 'd';
-        } else if(hoursOld > 1) {
+        } else if (hoursOld > 1) {
             old = Math.round(hoursOld) + 'h';
-        } else if(minutesOld > 1) {
+        } else if (minutesOld > 1) {
             old = Math.round(minutesOld) + 'm';
-        } else if(secondsOld > 1) {
+        } else if (secondsOld > 1) {
             old = Math.round(secondsOld) + 's';
         }
         return old;
     }
-  return(
-    // <li onClick={() => navigate(`/tuit/${tuit._id}`)}
-    <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
-      <div className="pe-2">
-        {
-          tuit.postedBy &&
-          <img src={`../images/${tuit.postedBy.username}.jpg`}
-               className="ttr-tuit-avatar-logo rounded-circle"/>
-        }
-      </div>
-      <div className="w-100">
-          <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"></i>
-          <Link to={`/tuit/${tuit._id}`}>
-          <i className="float-end fas fa-circle-ellipsis me-1"></i>
-          </Link>
-        <h2
-          className="fs-5">
-          {tuit.postedBy && tuit.postedBy.username}
-          @{tuit.postedBy && tuit.postedBy.username} -
-            <span className="ms-1">{daysOld(tuit)}</span></h2>
-        {tuit.tuit}
-        {
-          tuit.video &&
-            <TuitVideo tuit={tuit}/>
-        }
-        {
-        // TODO: Need a "TuitImages" to wrap multiple "TuitImage"
-          tuit.images &&
-          <TuitImage tuit={tuit}/>
-        }
-        <TuitStats tuit={tuit} likeTuit={likeTuit}/>
-      </div>
-    </li>
-  );
+    return (
+            <div className={"row m-0 border-top pt-2 pb-2"}>
+                <div className="col-2 pt-2">
+                    Avatar
+                </div>
+                <div className={"col-10"}>
+                    <div className={"col-12"}>
+                        <div className={"row m-0 align-items-center"}>
+                            <div
+                                className="col-8 col-lg-10 fs-5 ps-2">
+                                {tuit.postedBy && tuit.postedBy.username}
+                                @{tuit.postedBy && tuit.postedBy.username} -
+                                <span> {daysOld(tuit)}</span>
+                            </div>
+                            <Link className={"col-2 col-lg-1"} to={`/tuit/${tuit._id}`}>
+                                <i className="fas fa-ellipsis"/>
+                            </Link>
+                            <i className="col-2 col-lg-1 fa-solid fa-xmark" onClick={() => deleteTuit(tuit._id)}/>
+                        </div>
+                    </div>
+                    <div className={"col-12 ps-2"}>
+                        {tuit.tuit}
+                    </div>
+                    <div className={"col-12 mt-2 mb-2"}>
+                        {
+                            tuit.video.length > 0 &&
+                            <TuitVideo tuit={tuit}/>
+                        }
+                        {
+                            tuit.image.length > 0 &&
+                            <TuitImage tuit={tuit}/>
+                        }
+                    </div>
+                    <div className={"col-12"}>
+                        <TuitStats tuit={tuit} likeTuit={likeTuit}/>
+                    </div>
+                </div>
+            </div>
+    );
 }
 export default Tuit;

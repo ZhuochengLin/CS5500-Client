@@ -1,9 +1,9 @@
 import React from "react";
 const TuitImage = ({tuit}) => {
   return(
-    <div className="position-relative">
-      <img src={`../images/${tuit.image}`}
-           className="mt-2 w-100 ttr-rounded-15px"/>
+    <>
+      <img src={tuit.image[0]}
+           className="img-fluid rounded"/>
       {
         tuit.imageOverlay &&
         <span
@@ -12,7 +12,7 @@ const TuitImage = ({tuit}) => {
           {tuit.imageOverlay}
         </span>
       }
-    </div>
+    </>
   );
 };
 export default TuitImage;
