@@ -32,15 +32,12 @@ const Home = () => {
     const fileInfo = fileName.split(".");
     const format = fileInfo.at(-1).toLowerCase();
     if(format === 'jpeg' || format === 'png' || format === 'jpg'){
-      console.log('inside image condition');
-      console.log(file);
       tuit.append('image', file);
     }else if(format === 'mp4'){
-      console.log('inside video condition');
-      console.log(file);
       tuit.append('video', file);
     }else{
-      alert('Please check file format. Images: jpeg/png/jpg; video: mp4');
+      window.alert('Please check file format. Images: jpeg/png/jpg; video: mp4');
+      return;
     }
   }
 
