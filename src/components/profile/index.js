@@ -19,7 +19,7 @@ const Profile = () => {
         .then(() => navigate('/login'));
   }
   return(
-    <div className="row">
+    <div className="row m-0">
       <div className="col-12 border-start border-end">
         <h4 className="p-2 mb-0 pb-0 fw-bolder">
           {profile.username}

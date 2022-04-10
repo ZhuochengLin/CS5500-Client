@@ -4,7 +4,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import Tuiter from "./components/tuiter";
 import Home from "./components/home";
 import NoSuchScreen from "./components/NoSuchScreen";
 import {Login} from "./components/profile/login";
