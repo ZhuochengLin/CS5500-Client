@@ -41,8 +41,8 @@ function Navigation() {
                     })
                 }
             </ul>
-            <a href="#" className="col-12 mt-2 btn btn-primary rounded-pill fw-bold text-white">
-                Tuit</a>
+            <Link to={"/home"} className="col-12 mt-2 btn btn-primary rounded-pill fw-bold text-white">
+                Tuit</Link>
         </>
     );
 }

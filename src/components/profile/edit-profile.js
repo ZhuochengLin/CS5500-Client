@@ -1,113 +1,109 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import * as userServices from "../../services/users-service";
 
 const EditProfile = () => {
+    const [updatedUser, setUpdatedUser] = useState({
+        username: "lin", firstName: "Zhuocheng", lastName: "Lin",
+        headerImage: "", profilePhoto: "", bio: "Hello it's me", dateOfBirth: "1997-01-01",
+        email: "xxx@gmail.com"
+    });
+    const inputOnChangeHandler = (e, field) => {
+        const newUser = {...updatedUser};
+        newUser[field] = e.target.value;
+        setUpdatedUser(newUser);
+    }
+    const fileInputOnChangeHandler = (e, field) => {
+        const newUser = {...updatedUser};
+        newUser[field] = e.target.files[0];
+        setUpdatedUser(newUser);
+    }
     return(
-      <div className="ttr-edit-profile">
-          <div className="border border-bottom-0">
-              <Link to="/profile" className="btn btn-light rounded-pill fa-pull-left fw-bolder mt-2 mb-2 ms-2">
-                  <i className="fa fa-close"/>
-              </Link>
-              <Link to="/profile" className="btn btn-dark rounded-pill fa-pull-right fw-bolder mt-2 mb-2 me-2">
-                  Save
-              </Link>
-              <h4 className="p-2 mb-0 pb-0 fw-bolder">Edit profile</h4>
-              <div className="mb-5 position-relative">
-                  <img className="w-100" src="../images/nasa-profile-header.jpg" alt=""/>
+      <div className="row m-0 border-start border-end">
+          <div className={"col-12 p-3 pb-0"}>
+              <div className={"row m-0 align-items-center justify-content-between"}>
+                  <Link to="/profile" className="col-1 text-black fw-bolder">
+                      <i className="fa-solid fa-close"/>
+                  </Link>
+                  <h1 className={"col-9"}>Edit profile</h1>
+                  <Link to="/profile" className="col-2 btn btn-dark rounded-pill fw-bolder">
+                      Save
+                  </Link>
+              </div>
+          </div>
+              <div className="mb-5 position-relative text-center">
+                  Profile Image
                   <div className="bottom-0 left-0 position-absolute">
                       <div className="position-relative">
-                          <img className="position-relative ttr-z-index-1 ttr-top-40px ttr-width-150px"
-                               src="../images/nasa-3.png" alt=""/>
+                          Avatar
                       </div>
                   </div>
               </div>
-          </div>
-          <form action="profile.html">
-            <div className="border border-secondary rounded-3 p-2 mb-3">
+          <form>
+            <div className="border rounded-3 p-2 mb-3">
               <label htmlFor="username">Username</label>
               <input id="username" title="Username" readOnly
                      className="p-0 form-control border-0"
-                     placeholder="alan" value="alan"/>
+                     placeholder="alan" value={updatedUser.username}/>
             </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
+            <div className="border rounded-3 p-2 mb-3">
               <label htmlFor="first-name">First name</label>
               <input id="first-name"
                      className="p-0 form-control border-0"
-                     placeholder="Alan"/>
+                     placeholder="Alan" value={updatedUser.firstName ? updatedUser.firstName : ""}
+                     onChange={(e) => inputOnChangeHandler(e, "firstName")}/>
             </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
+            <div className="border rounded-3 p-2 mb-3">
               <label htmlFor="last-name">Last name</label>
               <input id="last-name"
                      className="p-0 form-control border-0"
-                     placeholder="Turin"/>
+                     placeholder="Turin" value={updatedUser.lastName ? updatedUser.lastName : ""}
+                     onChange={(e) => inputOnChangeHandler(e, "lastName")}/>
             </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
+            <div className="border rounded-3 p-2 mb-3">
               <label htmlFor="bio">Bio</label>
               <textarea
                 className="p-0 form-control border-0"
-                id="bio"></textarea>
+                id="bio" value={updatedUser.bio ? updatedUser.bio : ""}
+                onChange={(e) => inputOnChangeHandler(e, "bio")}/>
             </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
+            <div className="border rounded-3 p-2 mb-3">
               <label htmlFor="date-of-birth">Date of birth</label>
               <input id="date-of-birth"
                      className="p-0 form-control border-0"
-                     type="date" value="2003-01-02"/>
+                     type="date" value={updatedUser.dateOfBirth ? updatedUser.dateOfBirth : ""}
+                     onChange={(e) => inputOnChangeHandler(e, "dateOfBirth")}/>
             </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
+            <div className="border rounded-3 p-2 mb-3">
               <label htmlFor="email">Email</label>
               <input id="email" placeholder="alan@cam.ac.uk"
                      className="p-0 form-control border-0"
-                     type="email"/>
+                     type="email" value={updatedUser.email ? updatedUser.email : ""}
+                     onChange={(e) => inputOnChangeHandler(e, "email")}/>
             </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
+            <div className="border rounded-3 p-2 mb-3">
               <label htmlFor="password">Reset password</label>
               <input id="password"
                      className="p-0 form-control border-0"
-                     type="password"/>
+                     type="password"
+                     onChange={(e) => inputOnChangeHandler(e, "password")}/>
             </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
-              <label for="photo">Profile photo</label>
+            <div className="border rounded-3 p-2 mb-3">
+              <label htmlFor="photo">Profile photo</label>
               <input id="photo"
                      className="p-0 form-control border-0"
-                     type="file"/>
+                     type="file" accept={".jpg,.jpeg,.png"}
+                     onChange={(e) => fileInputOnChangeHandler(e, "profilePhoto")}/>
             </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
-              <label for="header">Header image</label>
+            <div className="border rounded-3 p-2 mb-3">
+              <label htmlFor="header">Header image</label>
               <input id="header"
                      className="p-0 form-control border-0"
-                     type="file"/>
+                     type="file" accept={".jpg,.jpeg,.png"}
+                     onChange={(e) => fileInputOnChangeHandler(e, "headerImage")}/>
             </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
-              <label for="account">Select account</label>
-              <select
-                className="p-0 form-control border-0"
-                id="account">
-                  <option>Personal account</option>
-                  <option selected>Academic account</option>
-              </select>
-            </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
-              Marital status
-              <input id="married"
-                     type="radio" name="marital"/>
-              <label for="married">Married</label>
-              <input id="single" type="radio"
-                     checked name="marital"/>
-              <label for="single">Single</label>
-            </div>
-            <div className="border border-secondary rounded-3 p-2 mb-3">
-              Topics of interest
-              <input id="space" type="checkbox"
-                     checked name="topics"/>
-              <label for="space">Space</label>
-              <input id="energy" type="checkbox" checked
-                     name="topics"/>
-              <label for="energy">Energy</label>
-              <input id="politics" type="checkbox"
-                     name="topics"/>
-              <label for="politics">Politics</label>
-            </div>
-        </form></div>
+        </form>
+      </div>
     );
 };
 export default EditProfile;
