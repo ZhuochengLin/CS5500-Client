@@ -6,10 +6,12 @@ import {useEffect, useState} from "react";
 const Home = () => {
   const [tuits, setTuits] = useState([]);
   const [tuitText, setTuitText] = useState('');
-  const [image, setImage] = useState({});
+  const [images, setImages] = useState([]);
+
   const findTuits = () =>
       service.findAllTuits()
         .then(tuits => setTuits(tuits));
+
   useEffect(() => {
     let isMounted = true;
     findTuits()
@@ -18,21 +20,19 @@ const Home = () => {
 
   const createTuit = () => {
     const tuit = new FormData();
+
+  for(const image of images){
     tuit.append('image', image);
+  }
+
     tuit.append('tuit', tuitText);
-    console.log('tuit');
-    console.log(tuit);
-    console.log('image');
-    console.log(image);
-    console.log('tuitText');
-    console.log(tuitText);
 
     return service.createTuit('my', tuit)
         .then(findTuits)
   }
 
   const uploadFileHandler = (event) =>{
-    setImage(event.target.files[0]);
+    setImages(event.target.files);
   }
 
   return(
@@ -58,7 +58,7 @@ const Home = () => {
                 <i className="far fa-face-smile me-3"/>
                 <i className="far fa-calendar me-3"/>
                 <i className="far fa-map-location me-3"/>
-                <input type="file" onChange={uploadFileHandler}/>
+                <input type="file" multiple onChange={uploadFileHandler}/>
               </div>
               <div className="col-2">
                 <a onClick={createTuit}
