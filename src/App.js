@@ -5,11 +5,6 @@ import Navigation from "./components/navigation";
 import WhatsHappening from "./components/whats-happening";
 
 function App() {
-  const navigate = useNavigate();
-  const toHome = () => {
-    navigate("/home");
-  }
-  useEffect(toHome, []);
   return (
     <div className={"container"}>
       <div className={"row"}>

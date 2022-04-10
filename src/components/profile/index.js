@@ -1,14 +1,10 @@
 import React, {useEffect, useState} from "react";
-import MyTuits from "./my-tuits";
-import {HashRouter, Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
+import {Link, Outlet, useNavigate, useLocation} from "react-router-dom";
 import * as service from "../../services/security-service"
-import TuitsAndReplies from "./tuits-and-replies";
-import Media from "./media";
-import MyLikes from "./my-likes";
-import MyDislikes from "./my-dislikes";
 const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const currPath = location.pathname.split("/").at(-1);
   const [profile, setProfile] = useState({});
   useEffect(async () => {
     try {
@@ -23,19 +19,18 @@ const Profile = () => {
         .then(() => navigate('/login'));
   }
   return(
-    <div className="ttr-profile">
-      <div className="border border-bottom-0">
+    <div className="row">
+      <div className="col-12 border-start border-end">
         <h4 className="p-2 mb-0 pb-0 fw-bolder">
           {profile.username}
-          <i className="fa fa-badge-check text-primary"/>
+          <i className="fa-solid fa-circle-check text-primary"/>
         </h4>
-        <span className="ps-2">67.6K Tuits</span>
+        <div className="ps-2">67.6K Tuits</div>
         <div className="mb-5 position-relative">
-          <img className="w-100" src="../images/nasa-profile-header.jpg" alt=""/>
+          <div className={"text-center"}>Profile image</div>
           <div className="bottom-0 left-0 position-absolute">
             <div className="position-relative">
-              <img className="position-relative ttr-z-index-1 ttr-top-40px ttr-width-150px"
-                   src="../images/nasa-3.png" alt=""/>
+              Avatar
             </div>
           </div>
           <Link to="/profile/edit"
@@ -47,7 +42,7 @@ const Profile = () => {
           </button>
         </div>
 
-        <div className="p-2">
+        <div className="col-12 p-2">
           <h4 className="fw-bolder pb-0 mb-0">
             {profile.username}<i className="fa fa-badge-check text-primary"/>
           </h4>
@@ -55,55 +50,50 @@ const Profile = () => {
           <p className="pt-2">
             There's space for everybody. Sparkles
           </p>
-          <p>
-            <i className="far fa-location-dot me-2"/>
-            Pale Blue Dot
-            <i className="far fa-link ms-3 me-2"/>
-            <a href="nasa.gov" className="text-decoration-none">nasa.gov</a>
-            <i className="far fa-balloon ms-3 me-2"/>
-            Born October 1, 1958
-            <br/>
-            <i className="far fa-calendar me-2"/>
-            Joined December 2007
-          </p>
-          <b>178</b> Following
-          <b className="ms-4">51.1M</b> Followers
+          <div className={"col-12"}>
+            <div className={"row m-0 text-nowrap align-items-center justify-content-start"}>
+              <div className={"col mb-2 ps-0"}><i className="fa-solid fa-location-dot"/><span className={"ps-2"}>Pale Blue Dot</span></div>
+              <div className={"col mb-2 ps-0"}><i className="fa-solid fa-link"/><a href="nasa.gov" className="text-decoration-none ps-2">nasa.gov</a></div>
+              <div className={"col mb-2 ps-0"}><i className="fa-solid fa-cake-candles"/><span className={"ps-2"}>Born October 1, 1958</span></div>
+              <div className={"col mb-2 ps-0"}><i className="col fa-solid fa-calendar"/><span className={"ps-2"}>Joined December 2007</span></div>
+            </div>
+          </div>
+          <div className={"col-12"}>
+            <b>178</b> Following
+            <b className="ms-4">51.1M</b> Followers
+          </div>
           <ul className="mt-4 nav nav-pills nav-fill">
             <li className="nav-item">
               <Link to="/profile/mytuits"
-                    className={`nav-link ${location.pathname.indexOf('mytuits') >= 0 ? 'active':''}`}>
+                    className={`nav-link ${currPath === "mytuits" || currPath === "profile" ? 'active':''}`}>
                 Tuits</Link>
             </li>
             <li className="nav-item">
               <Link to="/profile/tuits-and-replies"
-                    className={`nav-link ${location.pathname.indexOf('tuits-and-replies') >= 0 ? 'active':''}`}>
+                    className={`nav-link ${currPath === "tuits-and-replies" ? 'active':''}`}>
                 Tuits & replies</Link>
             </li>
             <li className="nav-item">
-              <Link to="/profile/media"
-                    className={`nav-link ${location.pathname.indexOf('media') >= 0 ? 'active':''}`}>
+              <Link to="/profile/mymedia"
+                    className={`nav-link ${currPath === "mymedia" ? 'active':''}`}>
                 Media</Link>
             </li>
             <li className="nav-item">
               <Link to="/profile/likes"
-                    className={`nav-link ${location.pathname.indexOf('mylikes') >= 0 ? 'active':''}`}>
+                    className={`nav-link ${currPath === "likes" ? 'active':''}`}>
                 Likes</Link>
             </li>
             <li className="nav-item">
               <Link to="/profile/dislikes"
-                    className={`nav-link ${location.pathname.indexOf('mydislikes') >= 0 ? 'active':''}`}>
+                    className={`nav-link ${currPath === "dislikes" ? 'active':''}`}>
                 Dislikes</Link>
             </li>
           </ul>
         </div>
       </div>
-        <Routes>
-          <Route path="/mytuits" element={<MyTuits/>}/>
-          <Route path="/tuits-and-replies" element={<TuitsAndReplies/>}/>
-          <Route path="/media" element={<Media/>}/>
-          <Route path="/likes" element={<MyLikes/>}/>
-          <Route path="/dislikes" element={<MyDislikes/>}/>
-        </Routes>
+      <div className={"col-12 border-start border-end pt-2"}>
+        <Outlet/>
+      </div>
     </div>
   );
 }

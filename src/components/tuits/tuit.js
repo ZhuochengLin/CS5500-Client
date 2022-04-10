@@ -28,7 +28,7 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
         return old;
     }
     return (
-            <div className={"row m-0 border-top pt-2 pb-2"}>
+            <div className={"row m-0 border-top pt-3 pb-3"}>
                 <div className="col-2 pt-2">
                     Avatar
                 </div>

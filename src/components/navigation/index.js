@@ -1,9 +1,9 @@
 import React from "react";
-import "./navigation.css";
 import {useLocation, Link} from "react-router-dom";
 
 function Navigation() {
     const {pathname} = useLocation();
+    const currPath = pathname.split("/").at(-1);
     const links = [
         {label: 'Home', icon: 'fa-solid fa-house-chimney', path: '/home'},
         {label: 'Explore', icon: 'fa-hashtag', path: '/explore'},
@@ -18,7 +18,7 @@ function Navigation() {
     ]
     return (
         <>
-            <ul className="col-12 list-group">
+            <ul className="col-12 list-group pt-2">
                 <li className={"list-group-item border-0"}>
                     <div className={"row align-items-center"}>
                         <i className={`col-3 fa fa-brands fa-twitter text-center text-primary fs-4`}/>
@@ -28,7 +28,7 @@ function Navigation() {
                     links.map((link, ndx) => {
                         return (
                             <li key={ndx}
-                                className={`list-group-item border-0 ${link.path.indexOf(pathname.split("/").at(-1)) > 0 ? 'fw-bold' : ''}`}>
+                                className={`list-group-item border-0 ${link.path.indexOf(currPath) > 0 ? 'fw-bold' : ''}`}>
                                 <Link to={link.path} id={link.label}
                                       className="text-decoration-none text-black">
                                         <div className={"row align-items-center"}>

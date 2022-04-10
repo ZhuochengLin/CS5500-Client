@@ -19,8 +19,25 @@ const Home = () => {
             isMounted = false;
         }
     }, []);
-    const uploadHandler = (event) => {
-        setFiles([...event.target.files]);
+    const uploadImageHandler = (event) => {
+        const newFiles = [...event.target.files];
+        if (newFiles.length > 6) {
+            alert("Maximum 6 images");
+            return;
+        }
+        if (newFiles.length > 0) {
+            setFiles(newFiles);
+        }
+    }
+    const uploadVideoHandler = (event) => {
+        const newFiles = [...event.target.files];
+        if (newFiles.length > 1) {
+            alert("Maximum 1 video");
+            return;
+        }
+        if (newFiles.length > 0) {
+            setFiles(newFiles);
+        }
     }
     const deleteFileHandler = (target) => {
         setFiles(files.filter(f => f.name !== target.name));
@@ -58,19 +75,19 @@ const Home = () => {
         service.createTuit('my', tuit).then(findTuits)
     }
     return (
-        <div className={"row m-0 border-start border-end"}>
-            <div className="col-12 fw-bold fs-2">Home Screen</div>
+        <div className={"row m-0 border-start border-end pt-2"}>
+            <h1 className="col-12 fw-bold fs-2">Home Screen</h1>
             <div className={"col-12"}>
                 <div className={"row m-0 align-items-center"}>
                     <div className={"col-2"}>
                         Avatar
                     </div>
                     <div className="col-10">
-                    <textarea
-                        onChange={(e) =>
-                            setTuitText(e.target.value)}
-                        placeholder="What's happening?"
-                        className="w-100 border-0"/>
+                        <textarea
+                            onChange={(e) =>
+                                setTuitText(e.target.value)}
+                            placeholder="What's happening?"
+                            className="col-12 border-0 p-2"/>
                         {
                             files.length > 0 &&
                             files.map((f, nth) =>
@@ -86,12 +103,12 @@ const Home = () => {
                                     <label className={"col-3"}><i className="fa-solid fa-image-portrait text-center"/></label>
                                     <label className={"col-3 nav-link"}>
                                         <i className=" fa-solid fa-image text-center"/>
-                                        <input className={"d-none"} type="file" multiple onChange={uploadHandler}
+                                        <input className={"d-none"} type="file" multiple onChange={uploadImageHandler}
                                                accept=".jpg,.png,.jpeg"/>
                                     </label>
                                     <label className={"col-3 nav-link"}>
                                         <i className="col-3 fa-solid fa-camera text-center"/>
-                                        <input className={"d-none"} type="file" multiple onChange={uploadHandler}
+                                        <input className={"d-none"} type="file" multiple onChange={uploadVideoHandler}
                                                accept=".mp4"/>
                                     </label>
                                     <label className={"col-3"}><i className="fa-solid fa-face-smile text-center"/></label>

@@ -4,34 +4,37 @@ import './whats-happening.css'
 
 function WhatsHappening() {
  return(
-  <div className="ttr-whats-happening p-2">
-   <div className="ttr-search position-relative">
-    <i className="fas fa-search position-absolute"></i>
+  <div className="row m-0 pt-2">
+   <div className="col-12 position-relative">
+    <i className="fas fa-search position-absolute"/>
     <input className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
            placeholder="Search Tuiter"/>
    </div>
-   <div className="bg-secondary bg-opacity-10 ttr-rounded-15px mt-2 p-2">
-    <h2>What's happening</h2>
-    {
-     whatsHappening.map(wh => {
-       return(
-         <div key={wh._id} className="ttr-whats-happening-tuit d-flex mb-3">
-           <div className="flex-grow-1">
-            <h3 className="fs-6 fw-lighter">
-             {wh.topic} - {wh['hours-ago']} hours ago</h3>
-            <div className="fw-bold mb-2 pe-1">
-             {wh.content}
-            </div>
-            <h4 className="fs-6 fw-lighter">{wh.likes} likes</h4>
-           </div>
-           <div>
-            <img src={`../images/${wh['user-logo']}`}
-                 className="ttr-rounded-15px ttr-user-logo"/>
-           </div>
-          </div>
-       );
-     })
-    }
+   <div className="col-12 bg-secondary bg-opacity-10 mt-2 p-3 rounded">
+       <div className={"row m-0"}>
+           <h1 className={"col-12 fs-2 fw-bold"}>What's happening</h1>
+           {
+               whatsHappening.map(wh => {
+                   return(
+                       <div key={wh._id} className="col-12 mb-3 p-0">
+                           <div className={"row m-0 align-items-center"}>
+                               <div className="col-9">
+                                   <h2 className="fs-6 fw-lighter">
+                                       {wh.topic} - {wh['hours-ago']} hours ago</h2>
+                                   <div className="fw-bold mb-2 pe-1">
+                                       {wh.content}
+                                   </div>
+                                   <div className="fs-6 fw-lighter">{wh.likes} likes</div>
+                               </div>
+                               <div className={"col-3"}>
+                                   Avatar
+                               </div>
+                           </div>
+                       </div>
+                   );
+               })
+           }
+       </div>
    </div>
   </div>
     );
