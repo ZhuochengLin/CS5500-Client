@@ -74,7 +74,7 @@ const Home = () => {
                 <i className="far fa-face-smile me-3"/>
                 <i className="far fa-calendar me-3"/>
                 <i className="far fa-map-location me-3"/>
-                <input type="file" multiple onChange={uploadFileHandler}/>
+                <input type="file" multiple onChange={uploadFileHandler} accept=".jpg,.png,.jpeg,.mp4"/>
               </div>
               <div className="col-2">
                 <a onClick={createTuit}
