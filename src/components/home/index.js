@@ -25,20 +25,28 @@ const Home = () => {
     }
 
     const tuit = new FormData();
-    console.log(files);
 
-  for(const file of files){
-    const fileName = file.name;
-    const fileInfo = fileName.split(".");
-    const format = fileInfo.at(-1).toLowerCase();
-    if(format === 'jpeg' || format === 'png' || format === 'jpg'){
-      tuit.append('image', file);
-    }else if(format === 'mp4'){
-      tuit.append('video', file);
-    }else{
-      window.alert('Please check file format. Images: jpeg/png/jpg; video: mp4');
-      return;
-    }
+    let hasImage = false;
+    let hasVideo = false;
+    for(const file of files){
+      const fileName = file.name;
+      const fileInfo = fileName.split(".");
+      const format = fileInfo.at(-1).toLowerCase();
+      if(format === 'jpeg' || format === 'png' || format === 'jpg'){
+        hasImage = true;
+        tuit.append('image', file);
+      }else if(format === 'mp4'){
+        hasVideo = true;
+        tuit.append('video', file);
+      }else{
+        window.alert('Please check file format. Images: jpeg/png/jpg; video: mp4');
+        return;
+      }
+
+      if(hasImage && hasVideo){
+        window.alert('Please do not upload image and video at the same time' );
+        return;
+      }
   }
 
     tuit.append('tuit', tuitText);
