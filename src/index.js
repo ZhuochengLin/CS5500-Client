@@ -22,41 +22,52 @@ import TuitsAndReplies from "./components/profile/tuits-and-replies";
 import Media from "./components/profile/my-media";
 import MyLikes from "./components/profile/my-likes";
 import MyDislikes from "./components/profile/my-dislikes";
+import {Provider} from "react-redux";
+import {PersistGate} from "redux-persist/integration/react";
+import createPersistStore from "./redux/store";
+import TuitEdit from "./components/tuits/tuit-edit";
+
+const {store, persistor} = createPersistStore();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-        <Routes>
-            <Route path={"/"} element={<App/>}>
-                <Route index element={<Home/>}/>
-                <Route path={"/home"} element={<Home/>}/>
-                <Route path={"/tuiter"} element={<Home/>}/>
-                <Route path={"/login"} element={<Login/>}/>
-                <Route path={"*"} element={<NoSuchScreen/>}/>
-                      <Route path="/signup" element={<Signup/>}/>
-                      <Route path="/tuiter/:uid" element={<Home/>}/>
-                      <Route path="/home/:uid" element={<Home/>}/>
-                      <Route path="/explore" element={<Explore/>}/>
-                      <Route path="/notifications" element={<Notifications/>}/>
-                      <Route path="/messages" element={<Messages/>}/>
-                      <Route path="/bookmarks" element={<Bookmarks/>}/>
-                      <Route path="/lists" element={<Lists/>}/>
-                        <Route path="/profile/*" element={<Profile/>}>
-                            <Route index element={<MyTuits/>}/>
-                            <Route index path="mytuits" element={<MyTuits/>}/>
-                            <Route path="tuits-and-replies" element={<TuitsAndReplies/>}/>
-                            <Route path="mymedia" element={<Media/>}/>
-                            <Route path="likes" element={<MyLikes/>}/>
-                            <Route path="dislikes" element={<MyDislikes/>}/>
+    <React.StrictMode>
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path={"/"} element={<App/>}>
+                            <Route index element={<Home/>}/>
+                            <Route path={"/home"} element={<Home/>}/>
+                            <Route path={"/tuiter"} element={<Home/>}/>
+                            <Route path={"/login"} element={<Login/>}/>
+                            <Route path={"*"} element={<NoSuchScreen/>}/>
+                            <Route path="/signup" element={<Signup/>}/>
+                            <Route path="/tuiter/:uid" element={<Home/>}/>
+                            <Route path="/home/:uid" element={<Home/>}/>
+                            <Route path="/explore" element={<Explore/>}/>
+                            <Route path="/notifications" element={<Notifications/>}/>
+                            <Route path="/messages" element={<Messages/>}/>
+                            <Route path="/bookmarks" element={<Bookmarks/>}/>
+                            <Route path="/lists" element={<Lists/>}/>
+                            <Route path="/profile/*" element={<Profile/>}>
+                                <Route index element={<MyTuits/>}/>
+                                <Route index path="mytuits" element={<MyTuits/>}/>
+                                <Route path="tuits-and-replies" element={<TuitsAndReplies/>}/>
+                                <Route path="mymedia" element={<Media/>}/>
+                                <Route path="likes" element={<MyLikes/>}/>
+                                <Route path="dislikes" element={<MyDislikes/>}/>
+                            </Route>
+                            <Route path="/profile/edit" element={<EditProfile/>}/>
+                            <Route path="/more" element={<More/>}/>
+                            <Route path="/tuit/:tid" element={<TuitScreen/>}/>
+                            <Route path="/tuit/:tid/edit" element={<TuitEdit/>}/>
                         </Route>
-                      <Route path="/profile/edit" element={<EditProfile/>}/>
-                      <Route path="/more" element={<More/>}/>
-                      <Route path="/tuit/:tid" element={<TuitScreen/>}/>
-            </Route>
-        </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+                    </Routes>
+                </BrowserRouter>
+            </PersistGate>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -3,7 +3,7 @@ import React from "react";
 const TuitStats = ({tuit, likeTuit = () => {}}) => {
     return (
       <div className="row m-0 mt-2">
-        <div className="col-3">
+        <div className="col">
             <div className={"row align-items-center"}>
                 <i className="col fa-regular fa-message pe-0"/>
                 {
@@ -12,7 +12,7 @@ const TuitStats = ({tuit, likeTuit = () => {}}) => {
                 }
             </div>
         </div>
-        <div className="col-3">
+        <div className="col">
             <div className={"row align-items-center"}>
                 <i className="col fa-solid fa-retweet pe-0"/>
                 {tuit.stats &&
@@ -20,13 +20,13 @@ const TuitStats = ({tuit, likeTuit = () => {}}) => {
                 }
             </div>
         </div>
-        <div className="col-3">
+        <div className="col">
             <div className={"row align-items-center"}>
                 <i className="col fa-regular fa-heart pe-0"/>
                 <span className="col ps-0">{tuit.stats && tuit.stats.likes}</span>
             </div>
         </div>
-        <div className="col-3">
+        <div className="col-2">
           <i className="fa-solid fa-share-from-square"/>
         </div>
       </div>

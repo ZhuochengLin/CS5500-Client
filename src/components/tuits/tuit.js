@@ -2,7 +2,9 @@ import React from "react";
 import TuitStats from "./tuit-stats";
 import TuitImages from "./tuit-images";
 import TuitVideo from "./tuit-video";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {getUserId} from "../../redux/selectors";
 
 const Tuit = ({tuit, deleteTuit, likeTuit}) => {
     const daysOld = (tuit) => {
@@ -27,44 +29,65 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
         }
         return old;
     }
+    const navigate = useNavigate();
+    const loggedInUserId = useSelector(getUserId);
+    const isMyTuit = tuit ? loggedInUserId === tuit.postedBy._id : false;
+    const goToTuitDetails = () => {
+        navigate(`/tuit/${tuit._id}`)
+    }
+    const goToTuitEdit = (e) => {
+        e.stopPropagation();
+        navigate(`/tuit/${tuit._id}/edit`)
+    }
+    const deleteTuitHandler = (e, tid) => {
+        e.stopPropagation();
+        deleteTuit(tid);
+    }
     return (
-            <div className={"row m-0 border-top pt-3 pb-3"}>
-                <div className="col-2 pt-2">
-                    Avatar
-                </div>
-                <div className={"col-10"}>
-                    <div className={"col-12"}>
-                        <div className={"row m-0 align-items-center"}>
-                            <div
-                                className="col-8 col-lg-10 fs-5 ps-2">
-                                {tuit.postedBy && tuit.postedBy.username}
-                                @{tuit.postedBy && tuit.postedBy.username} -
-                                <span> {daysOld(tuit)}</span>
-                            </div>
-                            <Link className={"col-2 col-lg-1"} to={`/tuit/${tuit._id}`}>
-                                <i className="fas fa-ellipsis"/>
-                            </Link>
-                            <i className="col-2 col-lg-1 fa-solid fa-xmark" onClick={() => deleteTuit(tuit._id)}/>
-                        </div>
+            <div className={"list-group-item list-group-item-action border-0 border-bottom"} onClick={goToTuitDetails}>
+                <div className={"row m-0 pt-3 pb-3"}>
+                    <div className="col-2 pt-2">
+                        Avatar
                     </div>
-                    <div className={"col-12 ps-2"}>
-                        {tuit.tuit}
-                    </div>
+                    <div className={"col-10"}>
+                        <div className={"col-12"}>
+                            <div className={"row m-0 align-items-center"}>
+                                <div
+                                    className="col-8 col-lg-10 fs-5 ps-2">
+                                    {tuit.postedBy && tuit.postedBy.username}
+                                    @{tuit.postedBy && tuit.postedBy.username} -
+                                    <span> {daysOld(tuit)}</span>
+                                </div>
+                                {
+                                    isMyTuit &&
+                                    <>
 
-                    <div className={"col-12 mt-2 mb-2"}>
-                        {
-                            (tuit.video.length !== 0) &&
-                            <div className={"row m-0"}>
-                                <TuitVideo tuit={tuit}/>
+                                        <i className="col-2 col-lg-1 fas fa-ellipsis" onClick={(e) => goToTuitEdit(e)} role={"button"}/>
+                                        <i title={"Delete"} className="col-2 col-lg-1 fa-solid fa-xmark" role={"button"}
+                                           onClick={(e) => deleteTuitHandler(e, tuit._id)}/>
+                                    </>
+                                }
                             </div>
-                        }
-                        {
-                            (tuit.image.length !== 0) &&
-                            <TuitImages tuit={tuit}/>
-                        }
-                    </div>
-                    <div className={"col-12"}>
-                        <TuitStats tuit={tuit} likeTuit={likeTuit}/>
+                        </div>
+                        <div className={"col-12 ps-2"} onClick={goToTuitDetails}>
+                            {tuit.tuit}
+                        </div>
+
+                        <div className={"col-12 pt-2"}>
+                            <div className={"row"}>
+                            {
+                                (tuit.video.length !== 0) &&
+                                <TuitVideo tuit={tuit}/>
+                            }
+                            {
+                                (tuit.image.length !== 0) &&
+                                <TuitImages tuit={tuit}/>
+                            }
+                            </div>
+                        </div>
+                        <div className={"col-12 pt-2"}>
+                            <TuitStats tuit={tuit} likeTuit={likeTuit}/>
+                        </div>
                     </div>
                 </div>
             </div>

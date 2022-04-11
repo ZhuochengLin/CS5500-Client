@@ -1,14 +1,19 @@
 import {useState} from "react";
 import * as service from "../../services/security-service";
 import {useNavigate} from "react-router-dom";
+import * as errorServices from "../../services/error-services";
+import {register} from "../../redux/actions";
+import {useDispatch} from "react-redux";
 
 const Signup = () => {
     const [newUser, setNewUser] = useState({});
     const navigate = useNavigate();
-    const signup = () =>
-        service.register(newUser)
-            .then(() => navigate('/profile/mytuits'))
-            .catch(e => alert(e));
+    const dispatch = useDispatch();
+    const signupButtonOnClick = () => {
+        register(dispatch, newUser)
+            .then(() => navigate("/profile/mytuits"))
+            .catch(e => errorServices.alertError(e));
+    }
     return (
         <div>
             <h1>Signup</h1>
@@ -20,11 +25,7 @@ const Signup = () => {
                    onChange={(e) =>
                        setNewUser({...newUser, password: e.target.value})}
                    placeholder="password" type="password"/>
-            <input className="mb-2 form-control"
-                   onChange={(e) =>
-                       setNewUser({...newUser, email: e.target.value})}
-                   placeholder="email" type="email"/>
-            <button onClick={signup}
+            <button onClick={signupButtonOnClick}
                     className="btn btn-primary mb-5">Signup
             </button>
         </div>
