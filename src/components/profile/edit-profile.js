@@ -25,7 +25,7 @@ const EditProfile = () => {
                   <Link to="/profile" className="col-1 text-black fw-bolder">
                       <i className="fa-solid fa-close"/>
                   </Link>
-                  <h1 className={"col-9"}>Edit profile</h1>
+                  <h1 className={"col-9 fw-bold fs-2"}>Edit profile</h1>
                   <Link to="/profile" className="col-2 btn btn-dark rounded-pill fw-bolder">
                       Save
                   </Link>

@@ -4,13 +4,13 @@ import './whats-happening.css'
 
 function WhatsHappening() {
  return(
-  <div className="row m-0 pt-2">
+  <div className="row m-0 pt-3">
    <div className="col-12 position-relative">
     <i className="fas fa-search position-absolute"/>
     <input className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
            placeholder="Search Tuiter"/>
    </div>
-   <div className="col-12 bg-secondary bg-opacity-10 mt-2 p-3 rounded">
+   <div className="col-12 bg-secondary bg-opacity-10 mt-3 p-3 rounded">
        <div className={"row m-0"}>
            <h1 className={"col-12 fs-2 fw-bold"}>What's happening</h1>
            {

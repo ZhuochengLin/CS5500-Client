@@ -9,11 +9,11 @@ const MyMedia = () => {
             .then(tuits => setMediaTuits(tuits));
     useEffect(findMyMediaTuits, []);
     return(
-       
-            <Tuits tuits={mediaTuits}
-                   refreshTuits={findMyMediaTuits}/>
-       
-
+        <>
+            {
+                mediaTuits && <Tuits tuits={mediaTuits} refreshTuits={findMyMediaTuits}/>
+            }
+        </>
     );
 };
 

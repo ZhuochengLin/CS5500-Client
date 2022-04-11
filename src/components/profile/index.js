@@ -1,26 +1,35 @@
 import React, {useEffect, useState} from "react";
 import {Link, Outlet, useNavigate, useLocation} from "react-router-dom";
 import * as service from "../../services/security-service"
+import {logout} from "../../redux/actions";
+import {useDispatch, useSelector} from "react-redux";
+import * as errorServices from "../../services/error-services";
+import {isLoggedIn} from "../../redux/selectors";
 const Profile = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const location = useLocation();
+  const loggedIn = useSelector(isLoggedIn);
   const currPath = location.pathname.split("/").at(-1);
   const [profile, setProfile] = useState({});
-  useEffect(async () => {
-    try {
-      const user = await service.profile();
-      setProfile(user);
-    } catch (e) {
-      navigate('/login');
+  const init = () => {
+    if (!loggedIn) {
+      navigate("/login");
+      return;
     }
-  }, []);
-  const logout = () => {
-    service.logout()
-        .then(() => navigate('/login'));
+    service.profile()
+        .then(p => setProfile(p))
+        .catch(e => errorServices.alertError(e));
+  }
+  useEffect(init, []);
+  const logoutButtonClick = () => {
+    logout(dispatch)
+        .then(() => navigate("/login"))
+        .catch(e => errorServices.alertError(e));
   }
   return(
     <div className="row m-0">
-      <div className="col-12 border-start border-end">
+      <div className="col-12 border border-top-0">
         <h4 className="p-2 mb-0 pb-0 fw-bolder">
           {profile.username}
           <i className="fa-solid fa-circle-check text-primary"/>
@@ -37,7 +46,7 @@ const Profile = () => {
                 className="mt-2 me-2 btn btn-large btn-light border border-secondary fw-bolder rounded-pill fa-pull-right">
             Edit profile
           </Link>
-          <button onClick={logout} className="mt-2 float-end btn btn-warning rounded-pill">
+          <button onClick={logoutButtonClick} className="mt-2 float-end btn btn-warning rounded-pill">
             Logout
           </button>
         </div>
@@ -91,7 +100,7 @@ const Profile = () => {
           </ul>
         </div>
       </div>
-      <div className={"col-12 border-start border-end pt-2"}>
+      <div className={"col-12 border-start border-end p-0 pt-2"}>
         <Outlet/>
       </div>
     </div>
