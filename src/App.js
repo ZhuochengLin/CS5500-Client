@@ -8,13 +8,13 @@ function App() {
   return (
     <div className={"container"}>
       <div className={"row"}>
-        <div className={"col-2 col-md-2"}>
+        <div className={"col-2 col-lg-2"}>
           <Navigation/>
         </div>
-        <div className={"col-10 col-md-6"}>
+        <div className={"col-10 col-lg-6"}>
           <Outlet/>
         </div>
-        <div className={"col col-md-4 d-none d-md-block"}>
+        <div className={"col col-md-4 d-none d-lg-block"}>
           <WhatsHappening/>
         </div>
       </div>

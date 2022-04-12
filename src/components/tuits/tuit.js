@@ -5,6 +5,7 @@ import TuitVideo from "./tuit-video";
 import {Link, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getUserId} from "../../redux/selectors";
+import {roundedImage} from "../../services/utils";
 
 const Tuit = ({tuit, deleteTuit, likeTuit}) => {
     const daysOld = (tuit) => {
@@ -47,7 +48,8 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
             <div className={"list-group-item list-group-item-action border-0 border-bottom"} onClick={goToTuitDetails}>
                 <div className={"row m-0 pt-3 pb-3"}>
                     <div className="col-2 pt-2">
-                        Avatar
+                        <img className={"img-fluid rounded-circle border border-2"}
+                             src={roundedImage(tuit.postedBy && tuit.postedBy.profilePhoto ? tuit.postedBy.profilePhoto : "")} alt={"..."}/>
                     </div>
                     <div className={"col-10"}>
                         <div className={"col-12"}>

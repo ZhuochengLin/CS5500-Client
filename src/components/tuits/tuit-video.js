@@ -1,8 +1,10 @@
 import React from "react";
+import "./tuit-video.css";
+
 const TuitVideo = ({tuit, deleteHandler}) => {
   return(
-      <div className={"col-12 ps-0 p-0 position-relative"}>
-          <div className={"row"}>
+      <div className={"col-12 position-relative"}>
+          <div id={"iframe-wrapper"} className={"row rounded overflow-hidden"}>
               <iframe src={tuit.video[0]}
                       title="Video player"
                       width="560" height="315"
