@@ -3,10 +3,9 @@ import Tuit from "./tuit";
 import * as likesService from "../../services/likes-service";
 import * as service from "../../services/tuits-service";
 import * as errorServices from "../../services/error-services";
-import {MY} from "../../services/constants";
+import {MY} from "../../services/utils";
 
 const Tuits = ({tuits = [], refreshTuits}) => {
-
     const likeTuit = (tuit) =>
         likesService.userLikesTuit(MY, tuit._id)
             .then(refreshTuits)

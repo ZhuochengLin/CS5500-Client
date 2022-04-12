@@ -2,7 +2,7 @@ import TuitVideo from "../tuits/tuit-video";
 import TuitImages from "../tuits/tuit-images";
 import React, {useState} from "react";
 import * as service from "../../services/tuits-service";
-import {MY} from "../../services/constants";
+import {MY} from "../../services/utils";
 import * as errorServices from "../../services/error-services";
 import {useNavigate} from "react-router-dom";
 
