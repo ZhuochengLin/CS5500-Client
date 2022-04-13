@@ -60,7 +60,14 @@ const EditProfile = () => {
                     <div className="mb-5 text-center">
                         <div className={"header-image"}>
                             <div className={"w-100 position-relative"} style={{backgroundImage: `url(${user.headerImage ? user.headerImage : ""})`, backgroundSize: "cover"}}>
-                                <img className={"profile-photo position-absolute rounded-circle border border-2"} src={roundedImage(user.profilePhoto ? user.profilePhoto : "")} alt={"..."}/>
+                                <label role={"button"}>
+                                    <img className={"profile-photo position-absolute rounded-circle border border-2"}
+                                         src={roundedImage(user.profilePhoto ? user.profilePhoto : "")} alt={"..."}/>
+                                    <input id="photo"
+                                           className="d-none"
+                                           type="file" accept={".jpg,.jpeg,.png"}
+                                           onChange={(e) => fileInputOnChangeHandler(e, "profilePhoto")}/>
+                                </label>
                             </div>
                         </div>
                     </div>

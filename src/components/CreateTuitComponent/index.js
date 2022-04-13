@@ -1,19 +1,13 @@
-import {roundedImage} from "../../services/utils";
 import React from "react";
-import {useSelector} from "react-redux";
-import {getProfile} from "../../redux/selectors";
+import Avatar from "../Avatar";
 
 const CreateTuitComponent = ({tuitText, files, textAreaOnChange, deleteFileHandler, uploadImageHandler, uploadVideoHandler, tuitOnClick}) => {
     const IMAGE_FORMATS = ["jpg", "png", "jpeg"];
     const VIDEO_FORMATS = ["mp4"]
-    const profile = useSelector(getProfile);
     return (
         <div className={"col-12 pb-4"}>
             <div className={"row m-0 align-items-center"}>
-                <div className={"col-2"}>
-                    <img className={"img-fluid rounded-circle border border-2"}
-                         src={roundedImage(profile.profilePhoto ? profile.profilePhoto : "")} alt={"..."}/>
-                </div>
+                <Avatar/>
                 <div className="col-10">
                         <textarea
                             onChange={(e) =>
@@ -40,7 +34,7 @@ const CreateTuitComponent = ({tuitText, files, textAreaOnChange, deleteFileHandl
                                            onChange={uploadImageHandler}
                                            accept={IMAGE_FORMATS.map(f => `.${f}`).join(",")}/>
                                 </label>
-                                <label className={"col-3 nav-link"}>
+                                <label className={"col-3 nav-link"} role={"button"}>
                                     <i className="col-3 fa-solid fa-camera text-center"/>
                                     <input className={"d-none"} type="file" multiple
                                            onChange={uploadVideoHandler}

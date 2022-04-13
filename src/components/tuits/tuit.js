@@ -5,31 +5,10 @@ import TuitVideo from "./tuit-video";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getUserId} from "../../redux/selectors";
-import {roundedImage} from "../../services/utils";
+import {daysOld, roundedImage} from "../../services/utils";
+import Avatar from "../Avatar";
 
 const Tuit = ({tuit, deleteTuit, likeTuit}) => {
-    const daysOld = (tuit) => {
-        const now = new Date();
-        const nowMillis = now.getTime();
-        const posted = new Date(tuit.postedOn);
-        const postedMillis = posted.getTime();
-        const oldMillis = nowMillis - postedMillis;
-        let old = 0.0;
-        const secondsOld = oldMillis / 1000.0;
-        const minutesOld = secondsOld / 60.0;
-        const hoursOld = minutesOld / 60.0;
-        const daysOld = hoursOld / 24.0;
-        if (daysOld > 1) {
-            old = Math.round(daysOld) + 'd';
-        } else if (hoursOld > 1) {
-            old = Math.round(hoursOld) + 'h';
-        } else if (minutesOld > 1) {
-            old = Math.round(minutesOld) + 'm';
-        } else if (secondsOld > 1) {
-            old = Math.round(secondsOld) + 's';
-        }
-        return old;
-    }
     const navigate = useNavigate();
     const loggedInUserId = useSelector(getUserId);
     const isMyTuit = tuit ? loggedInUserId === tuit.postedBy._id : false;
@@ -47,15 +26,11 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
     return (
             <div className={"list-group-item list-group-item-action border-0 border-bottom"} onClick={goToTuitDetails}>
                 <div className={"row m-0 pt-3 pb-3"}>
-                    <div className="col-2 pt-2">
-                        <img className={"img-fluid rounded-circle border border-2"}
-                             src={roundedImage(tuit.postedBy && tuit.postedBy.profilePhoto ? tuit.postedBy.profilePhoto : "")} alt={"..."}/>
-                    </div>
+                    <Avatar/>
                     <div className={"col-10"}>
                         <div className={"col-12"}>
                             <div className={"row m-0 align-items-center"}>
-                                <div
-                                    className="col-8 col-lg-10 fs-5 ps-2">
+                                <div className="col-8 col-lg-10 fs-5 ps-2">
                                     {tuit.postedBy && tuit.postedBy.username}
                                     @{tuit.postedBy && tuit.postedBy.username} -
                                     <span> {daysOld(tuit)}</span>
