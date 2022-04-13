@@ -2,7 +2,7 @@ import React from "react";
 import TuitStats from "./tuit-stats";
 import TuitImages from "./tuit-images";
 import TuitVideo from "./tuit-video";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getUserId} from "../../redux/selectors";
 import {roundedImage} from "../../services/utils";

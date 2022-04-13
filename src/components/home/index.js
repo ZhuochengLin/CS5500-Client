@@ -2,7 +2,6 @@ import React from "react";
 import Tuits from "../tuits";
 import * as service from "../../services/tuits-service";
 import {useEffect, useState} from "react";
-import {MY} from "../../services/utils";
 import * as errorServices from "../../services/error-services";
 import {useDispatch, useSelector} from "react-redux";
 import {isLoggedIn} from "../../redux/selectors";
@@ -28,7 +27,7 @@ const Home = () => {
         }
         findTuits();
     };
-    useEffect(init, []);
+    useEffect(() => {init();}, []);
     return (
         <>
             {
@@ -36,7 +35,7 @@ const Home = () => {
                 <div className={"row m-0 border border-top-0"}>
                     <h1 className="col-12 fw-bold fs-2 p-4">Home Screen</h1>
                     <CreateTuit/>
-                    <div className={"col-12 p-0"}>
+                    <div className={"col-12 p-0 border-top"}>
                         {
                             tuits &&
                             <Tuits tuits={tuits}
