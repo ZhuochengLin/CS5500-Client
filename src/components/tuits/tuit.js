@@ -26,7 +26,7 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
     return (
             <div className={"list-group-item list-group-item-action border-0 border-bottom"} onClick={goToTuitDetails}>
                 <div className={"row m-0 pt-3 pb-3"}>
-                    <Avatar/>
+                    {tuit.postedBy && <Avatar user={tuit.postedBy}/>}
                     <div className={"col-10"}>
                         <div className={"col-12"}>
                             <div className={"row m-0 align-items-center"}>

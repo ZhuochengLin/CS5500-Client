@@ -1,13 +1,16 @@
 import React from "react";
 import Avatar from "../Avatar";
+import {useSelector} from "react-redux";
+import {getProfile} from "../../redux/selectors";
 
 const CreateTuitComponent = ({tuitText, files, textAreaOnChange, deleteFileHandler, uploadImageHandler, uploadVideoHandler, tuitOnClick}) => {
     const IMAGE_FORMATS = ["jpg", "png", "jpeg"];
     const VIDEO_FORMATS = ["mp4"]
+    const profile = useSelector(getProfile);
     return (
         <div className={"col-12 pb-4"}>
             <div className={"row m-0 align-items-center"}>
-                <Avatar/>
+                <Avatar user={profile}/>
                 <div className="col-10">
                         <textarea
                             onChange={(e) =>

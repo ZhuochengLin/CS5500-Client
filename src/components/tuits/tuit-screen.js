@@ -55,7 +55,7 @@ const TuitScreen = () => {
                     </div>
                     <div className={"col-12"}>
                         <div className={"row m-0 mt-4 align-items-center"}>
-                            <Avatar/>
+                            {tuit.postedBy && <Avatar user={tuit.postedBy}/>}
                             <div className="col-8 col-lg-10 fs-5 ps-2">
                                 {tuit.postedBy && tuit.postedBy.username}
                                 @{tuit.postedBy && tuit.postedBy.username} -
