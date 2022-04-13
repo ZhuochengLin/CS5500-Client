@@ -78,11 +78,11 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
                         <div className={"col-12 pt-2"}>
                             <div className={"row"}>
                             {
-                                (tuit.video.length !== 0) &&
+                                (tuit.video && tuit.video.length > 0) &&
                                 <TuitVideo tuit={tuit}/>
                             }
                             {
-                                (tuit.image.length !== 0) &&
+                                (tuit.image && tuit.image.length > 0) &&
                                 <TuitImages tuit={tuit}/>
                             }
                             </div>
