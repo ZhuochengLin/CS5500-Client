@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import * as likeService from "../../services/likes-service";
 import { MY } from "../../services/utils";
+import * as errorServices from "../../services/error-services";
 
 const TuitStats = ({ tuit, likeTuit = () => { } }) => {
     const [hasLiked, setHasLike] = useState(false);
 
-    useEffect(() => {
-        const updateLike = async () => {
-            const liked = await likeService.userAlreadyLikedTuit(MY, tuit._id);
-            setHasLike(!!liked);
-        };
-        updateLike()
-    },
-        [tuit]);
+    const updateLike = () => {
+        likeService.userAlreadyLikedTuit(MY, tuit._id).
+            then((liked) => {
+                setHasLike(!!liked);
+            }).catch(e => errorServices.alertError(e));
+    };
+
+    useEffect(() => { updateLike() }, [tuit]);
 
     const likeTuitHandler = (e, tuit) => {
         e.stopPropagation();
