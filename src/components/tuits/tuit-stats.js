@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import * as likeService from "../../services/likes-service";
+import * as service from "../../services/tuits-service";
 import { MY } from "../../services/utils";
 import * as errorServices from "../../services/error-services";
+import { useParams } from "react-router-dom";
 
-const TuitStats = ({ tuit, likeTuit = () => { } }) => {
+
+const TuitStats = ({ tuit, refreshTuits }) => {
     const [hasLiked, setHasLike] = useState(false);
 
     const updateLike = () => {
@@ -13,12 +16,17 @@ const TuitStats = ({ tuit, likeTuit = () => { } }) => {
             }).catch(e => errorServices.alertError(e));
     };
 
-    useEffect(() => { updateLike() }, [tuit]);
+    const likeTuit = (tuit) =>
+        likeService.userLikesTuit(MY, tuit._id)
+            .then(refreshTuits)
+            .catch(e => errorServices.alertError(e));
 
     const likeTuitHandler = (e, tuit) => {
         e.stopPropagation();
         likeTuit(tuit);
     }
+
+    useEffect(() => { updateLike() }, [tuit]);
 
     return (
         <div className="row m-0 mt-2">
