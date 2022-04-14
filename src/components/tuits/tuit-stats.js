@@ -4,9 +4,10 @@ import * as service from "../../services/tuits-service";
 import { MY } from "../../services/utils";
 import * as errorServices from "../../services/error-services";
 import { useParams } from "react-router-dom";
+import * as likesService from "../../services/likes-service";
 
 
-const TuitStats = ({ tuit, refreshTuits }) => {
+const TuitStats = ({ tuit, refreshTuits}) => {
     const [hasLiked, setHasLike] = useState(false);
 
     const updateLike = () => {
@@ -16,14 +17,11 @@ const TuitStats = ({ tuit, refreshTuits }) => {
             }).catch(e => errorServices.alertError(e));
     };
 
-    const likeTuit = (tuit) =>
-        likeService.userLikesTuit(MY, tuit._id)
-            .then(refreshTuits)
-            .catch(e => errorServices.alertError(e));
-
     const likeTuitHandler = (e, tuit) => {
         e.stopPropagation();
-        likeTuit(tuit);
+        likesService.userLikesTuit(MY, tuit._id)
+            .then(refreshTuits)
+            .catch(e => errorServices.alertError(e));
     }
 
     useEffect(() => { updateLike() }, [tuit]);
@@ -37,7 +35,7 @@ const TuitStats = ({ tuit, refreshTuits }) => {
                         <i className="col fa-regular fa-message pe-0" />
                         {
                             tuit.stats &&
-                            <span className={"col ps-0"}>{tuit.stats.replies}</span>
+                            <span className={"col ps-3"}>{tuit.stats.replies}</span>
                         }
                     </span>
                 </div>
@@ -48,7 +46,7 @@ const TuitStats = ({ tuit, refreshTuits }) => {
                     <span>
                         <i className="col fa-solid fa-retweet pe-0" />
                         {tuit.stats &&
-                            <span className="col ps-0">{tuit.stats.retuits}</span>
+                            <span className="col ps-3">{tuit.stats.retuits}</span>
                         }
                     </span>
                 </div>
@@ -59,13 +57,15 @@ const TuitStats = ({ tuit, refreshTuits }) => {
                     <span onClick={(e) => likeTuitHandler(e, tuit)}>
                         {
                             hasLiked &&
-                            <i className="col fa-solid fa-heart pe-0" style={{ color: 'red' }}></i>
+                            <i className="col fa-solid fa-heart pe-0" style={{ color: 'red' }}/>
                         }
                         {
                             !hasLiked &&
-                            <i className="col fa-regular fa-heart pe-0"></i>
+                            <i className="col fa-regular fa-heart pe-0"/>
                         }
-                        {tuit.stats && tuit.stats.likes}
+                        {tuit.stats &&
+                            <span className={"col ps-3"}>{tuit.stats.likes}</span>
+                        }
                     </span>
                 </div>
             </div>

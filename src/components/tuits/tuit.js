@@ -7,8 +7,10 @@ import { useSelector } from "react-redux";
 import { getUserId } from "../../redux/selectors";
 import { daysOld, roundedImage } from "../../services/utils";
 import Avatar from "../Avatar";
+import * as service from "../../services/tuits-service";
+import * as errorServices from "../../services/error-services";
 
-const Tuit = ({ tuit, deleteTuit, likeTuit }) => {
+const Tuit = ({ tuit, refreshTuits }) => {
     const navigate = useNavigate();
     const loggedInUserId = useSelector(getUserId);
     const isMyTuit = tuit ? loggedInUserId === tuit.postedBy._id : false;
@@ -21,9 +23,10 @@ const Tuit = ({ tuit, deleteTuit, likeTuit }) => {
     }
     const deleteTuitHandler = (e, tid) => {
         e.stopPropagation();
-        deleteTuit(tid);
+        service.deleteTuit(tid)
+            .then(refreshTuits)
+            .catch(e => errorServices.alertError(e));
     }
-
     return (
         <div className={"list-group-item list-group-item-action border-0 border-bottom"} onClick={goToTuitDetails}>
             <div className={"row m-0 pt-3 pb-3"}>
@@ -64,7 +67,7 @@ const Tuit = ({ tuit, deleteTuit, likeTuit }) => {
                         </div>
                     </div>
                     <div className={"col-12 pt-2"}>
-                        <TuitStats tuit={tuit} likeTuit={likeTuit} />
+                        <TuitStats tuit={tuit} refreshTuits={refreshTuits}/>
                     </div>
                 </div>
             </div>

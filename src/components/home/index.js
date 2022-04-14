@@ -27,7 +27,7 @@ const Home = () => {
         }
         findTuits();
     };
-    useEffect(() => { init(); }, findTuits(), []);
+    useEffect(init, []);
     return (
         <>
             {
@@ -39,7 +39,7 @@ const Home = () => {
                         {
                             tuits &&
                             <Tuits tuits={tuits}
-                                refreshTuits={init, findTuits} />
+                                refreshTuits={findTuits} />
                         }
                     </div>
                 </div>}
