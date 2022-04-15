@@ -4,11 +4,15 @@ import {Carousel} from "react-bootstrap";
 
 const TuitImages = ({tuit, deleteHandler}) => {
     const images = tuit.image || [];
+    const multipleImages = images.length > 1;
   return(
-
-          <Carousel>
+          <Carousel prevIcon={<span className={`${multipleImages ? 'carousel-control-prev-icon' : ''}`}/>}
+                    nextIcon={<span className={`${multipleImages ? 'carousel-control-next-icon' : ''}`}/>}
+                    indicators={multipleImages}
+                    interval={3000}
+            >
               {images && images.map((image, nth) =>
-                  <Carousel.Item key={nth} className={"col-12 position-relative"}>
+                  <Carousel.Item key={nth} >
                       <TuitImage image={image} deleteHandler={deleteHandler}/>
                       {
                           deleteHandler &&

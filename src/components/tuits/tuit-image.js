@@ -3,7 +3,7 @@ const TuitImage = ({image}) => {
   return(
     <>
       <img src={image}
-           className="d-block w-100"/>
+           className="d-block w-100 align-content-center"/>
     </>
   )
 };
