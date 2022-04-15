@@ -1,13 +1,14 @@
 import React from "react";
 import TuitImage from "./tuit-image";
+import {Carousel} from "react-bootstrap";
 
 const TuitImages = ({tuit, deleteHandler}) => {
     const images = tuit.image || [];
   return(
 
-          <>
+          <Carousel>
               {images && images.map((image, nth) =>
-                  <div key={nth} className={"col-12 position-relative"}>
+                  <Carousel.Item key={nth} className={"col-12 position-relative"}>
                       <TuitImage image={image} deleteHandler={deleteHandler}/>
                       {
                           deleteHandler &&
@@ -16,9 +17,9 @@ const TuitImages = ({tuit, deleteHandler}) => {
                             Remove
                           </span>
                       }
-                  </div>
+                  </Carousel.Item>
               )}
-          </>
+          </Carousel>
 
   );
 };
