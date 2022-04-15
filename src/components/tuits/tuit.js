@@ -9,6 +9,7 @@ import { daysOld, roundedImage } from "../../services/utils";
 import Avatar from "../Avatar";
 import * as service from "../../services/tuits-service";
 import * as errorServices from "../../services/error-services";
+import {Carousel} from "react-bootstrap";
 
 const Tuit = ({ tuit, refreshTuits }) => {
     const navigate = useNavigate();
@@ -42,7 +43,6 @@ const Tuit = ({ tuit, refreshTuits }) => {
                             {
                                 isMyTuit &&
                                 <>
-
                                     <i className="col-2 col-lg-1 fas fa-ellipsis" onClick={(e) => goToTuitEdit(e)} role={"button"} />
                                     <i title={"Delete"} className="col-2 col-lg-1 fa-solid fa-xmark" role={"button"}
                                         onClick={(e) => deleteTuitHandler(e, tuit._id)} />
@@ -61,8 +61,8 @@ const Tuit = ({ tuit, refreshTuits }) => {
                                 <TuitVideo tuit={tuit} />
                             }
                             {
-                                (tuit.image && tuit.image.length > 0) &&
-                                <TuitImages tuit={tuit} />
+                                    (tuit.image && tuit.image.length > 0) &&
+                                    <TuitImages tuit={tuit} />
                             }
                         </div>
                     </div>
