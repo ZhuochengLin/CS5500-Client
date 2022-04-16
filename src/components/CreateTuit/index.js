@@ -14,6 +14,8 @@ const CreateTuit = () => {
     const profile = useSelector(getProfile);
     const uploadImageHandler = (event) => {
         const newFiles = [...event.target.files];
+        // reset value so the same file won't be blocked
+        event.target.value = "";
         if (newFiles.length > 6) {
             alert("Maximum 6 images");
             return;
@@ -24,6 +26,7 @@ const CreateTuit = () => {
     }
     const uploadVideoHandler = (event) => {
         const newFiles = [...event.target.files];
+        event.target.value = "";
         if (newFiles.length > 1) {
             alert("Maximum 1 video");
             return;
@@ -33,7 +36,8 @@ const CreateTuit = () => {
         }
     }
     const deleteFileHandler = (target) => {
-        setFiles(files.filter(f => f.name !== target.name));
+        const newFiles = files.filter(f => f.name !== target.name);
+        setFiles(newFiles);
     }
     const createTuit = () => {
         const tuit = new FormData();

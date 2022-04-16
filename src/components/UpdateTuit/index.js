@@ -24,6 +24,7 @@ const UpdateTuit = ({tuit={tuit: "text content", image: [], video: []}}) => {
     }
     const uploadImageHandler = (event) => {
         const newFiles = [...event.target.files];
+        event.target.value = "";
         if (newFiles.length + newTuit.image.length > 6) {
             alert("Maximum 6 images");
             return;
@@ -36,6 +37,7 @@ const UpdateTuit = ({tuit={tuit: "text content", image: [], video: []}}) => {
     }
     const uploadVideoHandler = (event) => {
         const newFiles = [...event.target.files];
+        event.target.value = "";
         if (newFiles.length + newTuit.video.length > 1) {
             alert("Maximum 1 video");
             return;

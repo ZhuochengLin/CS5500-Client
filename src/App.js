@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
+import React from "react";
 import './styles.css';
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import Navigation from "./components/navigation";
 import WhatsHappening from "./components/whats-happening";
 

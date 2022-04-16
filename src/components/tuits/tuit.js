@@ -29,7 +29,7 @@ const Tuit = ({ tuit, refreshTuits }) => {
             .catch(e => errorServices.alertError(e));
     }
     return (
-        <div className={"list-group-item list-group-item-action border-0 border-bottom"} onClick={goToTuitDetails}>
+        <div className={"list-group-item border-0 border-bottom"} onClick={goToTuitDetails}>
             <div className={"row m-0 pt-3 pb-3"}>
                 {tuit.postedBy && <Avatar user={tuit.postedBy} />}
                 <div className={"col-10"}>
