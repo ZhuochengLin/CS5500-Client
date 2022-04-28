@@ -74,12 +74,12 @@ describe("findTuits", () => {
 
     beforeAll(async () => {
         mockUser = await authServices.register(MOCK_USER);
-        return Promise.all(testTuits.map(tuit => tuitServices.createTuit(mockUser._id, { tuit: tuit })));
+        await Promise.all(testTuits.map(tuit => tuitServices.createTuit(mockUser._id, { tuit: tuit })));
     })
 
     afterAll(async () => {
         const insertedTuits = await tuitServices.findTuitByUser(mockUser._id);
-        await insertedTuits.map(tuit => tuitServices.deleteTuit(tuit._id));
+        await Promise.all(insertedTuits.map(tuit => tuitServices.deleteTuit(tuit._id)))
         await authServices.login({ username: "admin", password: "admin" });
         await userServices.deleteUser(mockUser._id);
         await authServices.logout();
