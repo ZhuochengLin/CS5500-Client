@@ -172,3 +172,18 @@ describe("deleteTuit", () => {
 
 
 
+describe("login as normal user", () => {
+
+    let mockUser = {};
+
+    beforeAll(async () => {
+        mockUser = await authServices.register(MOCK_USER);
+    })
+
+    afterAll(async () => {
+        await authServices.login({username: "admin", password: "admin"});
+        await userServices.deleteUser(mockUser._id);
+        await authServices.logout();
+    })
+
+})
