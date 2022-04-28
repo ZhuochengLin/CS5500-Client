@@ -10,7 +10,7 @@ const CreateTuitComponent = ({tuitText, files, textAreaOnChange, deleteFileHandl
     return (
         <div className={"col-12 pb-4"}>
             <div className={"row m-0 align-items-center"}>
-                <Avatar user={profile}/>
+                {profile && <Avatar user={profile}/>}
                 <div className="col-10">
                         <textarea
                             onChange={(e) =>
@@ -33,13 +33,13 @@ const CreateTuitComponent = ({tuitText, files, textAreaOnChange, deleteFileHandl
                             <div className={"row justify-content-evenly align-items-center"}>
                                 <label className={"col-3 nav-link"} role={"button"}>
                                     <i className=" fa-solid fa-image text-center"/>
-                                    <input className={"d-none"} type="file" multiple
+                                    <input data-testid="image-uploader" id={"image-uploader"} className={"d-none"} type="file" multiple
                                            onChange={uploadImageHandler}
                                            accept={IMAGE_FORMATS.map(f => `.${f}`).join(",")}/>
                                 </label>
                                 <label className={"col-3 nav-link"} role={"button"}>
                                     <i className="col-3 fa-solid fa-camera text-center"/>
-                                    <input className={"d-none"} type="file" multiple
+                                    <input data-testid="video-uploader" id={"video-uploader"} className={"d-none"} type="file" multiple
                                            onChange={uploadVideoHandler}
                                            accept={VIDEO_FORMATS.map(f => `.${f}`).join(",")}/>
                                 </label>

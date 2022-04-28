@@ -23,7 +23,13 @@ const MOCK_USER = {
 
 const IMAGE1_PATH = `${__dirname}/test-media/image1.jpg`;
 const IMAGE2_PATH = `${__dirname}/test-media/image2.jpg`;
-const VIDEO_PATH = `${__dirname}/test-media/video.mp4`;
+const IMAGE3_PATH = `${__dirname}/test-media/image3.jpg`;
+const IMAGE4_PATH = `${__dirname}/test-media/image4.png`;
+const IMAGE5_PATH = `${__dirname}/test-media/image5.jpg`;
+const IMAGE6_PATH = `${__dirname}/test-media/image6.jpg`;
+const IMAGE7_PATH = `${__dirname}/test-media/image7.jpg`;
+const VIDEO1_PATH = `${__dirname}/test-media/video1.mp4`;
+const VIDEO2_PATH = `${__dirname}/test-media/video2.mp4`;
 
 describe("login as normal user", () => {
 
@@ -67,7 +73,7 @@ describe("login as normal user", () => {
 
     test("create tuit with one video", async () => {
         const tuitFormData = new FormData();
-        const videoData = fs.readFileSync(VIDEO_PATH);
+        const videoData = fs.readFileSync(VIDEO1_PATH);
         const blob = new Blob([videoData], {type: "video/mp4"})
         tuitFormData.append("video", blob);
         tuitFormData.append("tuit", "test media");
@@ -77,10 +83,39 @@ describe("login as normal user", () => {
         await tuitServices.deleteTuit(tuit._id);
     })
 
+    test("create tuit with more than six images will be rejected", async () => {
+        const tuitFormData = new FormData();
+        for (const imagePath of
+            [IMAGE1_PATH, IMAGE2_PATH, IMAGE3_PATH, IMAGE4_PATH, IMAGE5_PATH, IMAGE6_PATH, IMAGE7_PATH]) {
+            const imageData = fs.readFileSync(imagePath);
+            const blob = new Blob([imageData], {type: "image/jpeg"})
+            tuitFormData.append("image", blob);
+        }
+        tuitFormData.append("tuit", "test media");
+        const tryCreateTuitWithSevenImages = async () => {
+            await tuitServices.createTuit(MY, tuitFormData);
+        }
+        await expect(tryCreateTuitWithSevenImages).rejects.toThrow();
+    })
+
+    test("create tuit with more than one video will be rejected", async () => {
+        const tuitFormData = new FormData();
+        for (const videoPath of [VIDEO1_PATH, VIDEO2_PATH]) {
+            const videoData = fs.readFileSync(videoPath);
+            const blob = new Blob([videoData], {type: "video/mp4"})
+            tuitFormData.append("video", blob);
+        }
+        tuitFormData.append("tuit", "test media");
+        const tryCreateTuitWithTwoVideos = async () => {
+            await tuitServices.createTuit(MY, tuitFormData);
+        }
+        await expect(tryCreateTuitWithTwoVideos).rejects.toThrow();
+    })
+
     test("create tuit with both image and video will be rejected", async () => {
         const tuitFormData = new FormData();
         const imageData = fs.readFileSync(IMAGE1_PATH);
-        const videoData = fs.readFileSync(VIDEO_PATH);
+        const videoData = fs.readFileSync(VIDEO1_PATH);
         tuitFormData.append("tuit", "test media");
         tuitFormData.append("image", new Blob([imageData], {type: "image/jpeg"}));
         tuitFormData.append("video", new Blob([videoData], {type: "video/mp4"}));
