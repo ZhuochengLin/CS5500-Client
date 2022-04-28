@@ -6,7 +6,6 @@ import {isLoggedIn} from "../../redux/selectors";
 
 function Navigation() {
     const {pathname} = useLocation();
-    const currPath = pathname.split("/").at(-1);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const loggedIn = useSelector(isLoggedIn);
@@ -17,7 +16,7 @@ function Navigation() {
         {label: 'Messages', icon: 'fa-solid fa-envelope', path: '/messages'},
         {label: 'Bookmarks', icon: 'fa-solid fa-bookmark', path: '/bookmarks'},
         {label: 'Lists', icon: 'fa-solid fa-list', path: '/lists'},
-        {label: 'Profile', icon: 'fa-solid fa-address-card', path: '/profile/mytuits'},
+        {label: 'Profile', icon: 'fa-solid fa-address-card', path: '/profile'},
         {label: 'More', icon: 'fa-solid fa-ellipsis', path: '/more'},
         {label: 'Login', icon: 'fa-solid fa-user', path: '/login'},
         {label: 'Signup', icon: 'fa-solid fa-user-plus', path: '/signup'},
@@ -44,7 +43,7 @@ function Navigation() {
                     links.map((link, ndx) => {
                         return (
                             <li key={ndx}
-                                className={`list-group-item border-0 ${link.path.indexOf(currPath) > 0 ? 'fw-bold' : ''}`}>
+                                className={`list-group-item border-0 ${pathname.match(`${link.path}`) ? 'fw-bold' : ''}`}>
                                 <Link to={link.path} id={link.label}
                                       className="text-decoration-none text-black">
                                         <div className={"row align-items-center"}>

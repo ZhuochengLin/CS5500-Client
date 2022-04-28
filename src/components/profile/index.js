@@ -105,11 +105,6 @@ const Profile = () => {
                             className={`nav-link ${currPath === "likes" ? 'active' : ''}`}>
                         Likes</Link>
                     </li>
-                    <li className="nav-item">
-                      <Link to="/profile/dislikes"
-                            className={`nav-link ${currPath === "dislikes" ? 'active' : ''}`}>
-                        Dislikes</Link>
-                    </li>
                   </ul>
                 </div>
               </div>

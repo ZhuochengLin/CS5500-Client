@@ -31,7 +31,7 @@ const CreateTuitComponent = ({tuitText, files, textAreaOnChange, deleteFileHandl
                     <div className="row align-items-center m-0">
                         <div className="col-8 fs-4 text-primary">
                             <div className={"row justify-content-evenly align-items-center"}>
-                                <label className={"col-3 nav-link"}>
+                                <label className={"col-3 nav-link"} role={"button"}>
                                     <i className=" fa-solid fa-image text-center"/>
                                     <input className={"d-none"} type="file" multiple
                                            onChange={uploadImageHandler}

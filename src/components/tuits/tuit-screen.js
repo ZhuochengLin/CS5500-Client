@@ -37,7 +37,7 @@ const TuitScreen = () => {
                 <div className={"row m-0 border-start border-end pt-3"}>
                     <div className={"col-12"}>
                         <div className={"row m-0 align-items-center justify-content-start"}>
-                            <Link to={"/home"} className={"col-1 text-decoration-none text-black"}>
+                            <Link to={-1} className={"col-1 text-decoration-none text-black"}>
                                 <i className={"fa-solid fa-arrow-left"} />
                             </Link>
                             <span className={"col-1 fs-2 fw-bold"}>

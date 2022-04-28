@@ -21,7 +21,7 @@ const TuitEdit = () => {
         <div className={"row m-0 border-start border-end pt-3"}>
             <div className={"col-12"}>
                 <div className={"row m-0 align-items-center justify-content-start pe-2"}>
-                    <Link to={`/tuit/${tid}`} className={"col-1 text-decoration-none text-black"}>
+                    <Link to={-1} className={"col-1 text-decoration-none text-black"}>
                         <i className={"fa-solid fa-arrow-left"}/>
                     </Link>
                     <span className={"col-3 fs-2 fw-bold text-nowrap"}>

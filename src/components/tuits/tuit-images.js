@@ -15,7 +15,6 @@ const TuitImages = ({tuit, deleteHandler}) => {
             {images && images.map((image, nth) =>
                 <Carousel.Item key={nth}>
                     <TuitImage image={image} deleteHandler={deleteHandler}/>
-
                 </Carousel.Item>
             )}
         </Carousel>
