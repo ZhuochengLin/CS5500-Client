@@ -2,6 +2,7 @@ import * as tuitServices from "../services/tuits-service";
 import * as authServices from "../services/auth-service";
 import * as userServices from "../services/users-service";
 import {MY} from "../services/utils";
+import tuit from "../components/tuits/tuit";
 
 const fs = require("fs");
 
@@ -87,6 +88,23 @@ describe("login as normal user", () => {
             await tuitServices.createTuit(MY, tuitFormData);
         }
         await expect(tryCreateTuitWithBothMedia).rejects.toThrow();
+    })
+
+    test("find tuits with media", async () => {
+        let tuit1 = await tuitServices.createTuit(MY, {tuit: "tuit with no media"});
+        let tuitsWithMedia = await tuitServices.findTuitsWithMediaByUser(MY);
+        expect(tuitsWithMedia.length).toBe(0);
+
+        const tuitFormData = new FormData();
+        const imageData = fs.readFileSync(IMAGE1_PATH);
+        tuitFormData.append("tuit", "tuit with media");
+        tuitFormData.append("image", new Blob([imageData], {type: "image/jpeg"}));
+        let tuit2 = await tuitServices.createTuit(MY, tuitFormData);
+        tuitsWithMedia = await tuitServices.findTuitsWithMediaByUser(MY);
+        expect(tuitsWithMedia.length).toBe(1);
+
+        await tuitServices.deleteTuit(tuit1._id);
+        await tuitServices.deleteTuit(tuit2._id);
     })
 
 })
