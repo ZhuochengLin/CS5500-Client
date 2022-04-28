@@ -1,5 +1,5 @@
 import {LOG_IN, LOG_OUT} from "./actionTypes";
-import * as authServices from "../services/security-service";
+import * as authServices from "../services/auth-service";
 
 export const login = async (dispatch, user) => {
     const response = await authServices.login(user);

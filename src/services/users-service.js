@@ -1,7 +1,5 @@
 import axios from "axios";
-
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-const USERS_API = `${BASE_URL}/api/users`;
+import {USERS_API} from "./utils";
 
 const api = axios.create({
   withCredentials: true

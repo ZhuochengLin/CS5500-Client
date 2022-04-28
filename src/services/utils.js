@@ -1,3 +1,8 @@
+export const BASE_URL = process.env.REACT_APP_BASE_URL;
+export const USERS_API = `${BASE_URL}/api/users`;
+export const AUTH_API = `${BASE_URL}/api/auth`;
+export const TUITS_API = `${BASE_URL}/api/tuits`;
+
 export const MY = "my";
 export const USER_FIELDS = ["username", "password", "email", "bio", "firstName", "lastName",
     "profilePhoto", "headerImage", "dateOfBirth"]

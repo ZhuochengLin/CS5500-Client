@@ -1,5 +1,5 @@
 import {useState} from "react";
-import * as service from "../../services/security-service";
+import * as service from "../../services/auth-service";
 import {useNavigate} from "react-router-dom";
 import * as errorServices from "../../services/error-services";
 import {register} from "../../redux/actions";
