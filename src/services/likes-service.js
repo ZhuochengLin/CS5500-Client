@@ -1,14 +1,10 @@
 import axios from "axios";
-
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-const USERS_API = `${BASE_URL}/api/users`;
-const TUITS_API = `${BASE_URL}/api/tuits`;
+import {TUITS_API, USERS_API} from "./utils";
 
 const api = axios.create({
     withCredentials: true
 });
 
-// TODO: Modify like services to suit our needs
 export const findAllTuitsLikedByUser = (userId) =>
     api.get(`${USERS_API}/${userId}/likes`)
         .then(response => response.data);

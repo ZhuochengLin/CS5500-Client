@@ -1,5 +1,5 @@
 import axios from "axios";
-import {TUITS_API} from "./utils";
+import {TUITS_API, USERS_API} from "./utils";
 
 const api = axios.create({
     withCredentials: true
