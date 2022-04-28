@@ -20,7 +20,7 @@ const MOCK_USER = {
 describe("createTuit", () => {
     let testUser = {};
     let testTuit = {
-        tuit: "Hello World"
+        tuit: "Hello!"
     };
 
     beforeAll(async () => {
@@ -28,6 +28,7 @@ describe("createTuit", () => {
     })
 
     afterAll(async () => {
+        await tuitServices.deleteTuit(testTuit._id);
         await authServices.login({ username: "admin", password: "admin" });
         await userServices.deleteUser(testUser._id);
         await authServices.logout();
@@ -36,15 +37,14 @@ describe("createTuit", () => {
     test("create tuits", async () => {
         testTuit = await tuitServices.createTuit(testUser._id, testTuit);
         const insertedTuit = await tuitServices.findTuitById(testTuit._id);
-        expect(insertedTuit.content).toEqual(testTuit.content);
-        tuitServices.deleteTuit(testTuit._id);
+        expect(insertedTuit.tuit).toEqual(testTuit.tuit);
     });
 });
 
 describe("findTuitById", () => {
     let testUser = {};
     let testTuit = {
-        tuit: "Hello World"
+        tuit: "Hello World!"
     };
 
     beforeAll(async () => {
@@ -53,6 +53,7 @@ describe("findTuitById", () => {
     })
 
     afterAll(async () => {
+        await tuitServices.deleteTuit(testTuit._id);
         await authServices.login({ username: "admin", password: "admin" });
         await userServices.deleteUser(testUser._id);
         await authServices.logout();
@@ -62,14 +63,13 @@ describe("findTuitById", () => {
         const insertedTuit = await tuitServices.findTuitById(testTuit._id);
         expect(insertedTuit._id).toEqual(testTuit._id);
         expect(insertedTuit.tuit).toEqual(testTuit.tuit);
-        tuitServices.deleteTuit(testTuit._id);
     })
 });
 
 describe("findTuits", () => {
     let mockUser = {};
     let testTuits = [
-        "tuit", "test"
+        "Today", "is", "a", "good", "day"
     ];
 
     beforeAll(async () => {
@@ -78,6 +78,8 @@ describe("findTuits", () => {
     })
 
     afterAll(async () => {
+        const insertedTuits = await tuitServices.findTuitByUser(mockUser._id);
+        await insertedTuits.map(tuit => tuitServices.deleteTuit(tuit._id));
         await authServices.login({ username: "admin", password: "admin" });
         await userServices.deleteUser(mockUser._id);
         await authServices.logout();
@@ -96,9 +98,6 @@ describe("findTuits", () => {
             const insertedOne = mockTuits.find(tuit => tuit.tuit === tuitContent);
             expect(insertedOne.postedBy._id).toEqual(mockUser._id);
         })
-
-        const insertedTuits = await tuitServices.findTuitByUser(mockUser._id);
-        insertedTuits.map(tuit => tuitServices.deleteTuit(tuit._id));
     })
 
     test("find tuits by user", async () => {
@@ -115,7 +114,7 @@ describe("findTuits", () => {
 describe("updateTuit", () => {
     let testUser = {};
     let testTuit = {
-        tuit: "Hello World"
+        tuit: "Hi World!"
     };
 
     beforeAll(async () => {
@@ -124,13 +123,13 @@ describe("updateTuit", () => {
     })
 
     afterAll(async () => {
+        await tuitServices.deleteTuit(testTuit._id);
         await authServices.login({ username: "admin", password: "admin" });
         await userServices.deleteUser(testUser._id);
         await authServices.logout();
     })
 
     test("can update tuit with REST API", async () => {
-        // old content
         let insertedTuit = await tuitServices.findTuitById(testTuit._id);
         expect(insertedTuit.tuit).toEqual(testTuit.tuit);
 
@@ -138,15 +137,13 @@ describe("updateTuit", () => {
         await tuitServices.updateTuit(testUser._id, insertedTuit._id, { tuit: newContent });
         insertedTuit = await tuitServices.findTuitById(testTuit._id);
         expect(insertedTuit.tuit).toEqual(newContent);
-
-        tuitServices.deleteTuit(testTuit._id);
     });
 });
 
 describe("deleteTuit", () => {
     let testUser = {};
     let testTuit = {
-        tuit: "Hello World"
+        tuit: "Hello Hello!"
     };
 
     beforeAll(async () => {
