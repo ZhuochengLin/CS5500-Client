@@ -9,7 +9,6 @@ import { daysOld, roundedImage } from "../../services/utils";
 import Avatar from "../Avatar";
 import * as service from "../../services/tuits-service";
 import * as errorServices from "../../services/error-services";
-import {Carousel} from "react-bootstrap";
 
 const Tuit = ({ tuit, refreshTuits }) => {
     const navigate = useNavigate();
