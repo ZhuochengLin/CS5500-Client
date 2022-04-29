@@ -1,10 +1,10 @@
 import {fireEvent, waitFor} from "@testing-library/react";
 import {render} from "@testing-library/react";
-import CreateTuit from "../components/CreateTuit";
-import createPersistStore from "../redux/store";
+import CreateTuit from "../../components/CreateTuit";
+import createPersistStore from "../../redux/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
-import CreateTuitComponent from "../components/CreateTuitComponent";
+import CreateTuitComponent from "../../components/CreateTuitComponent";
 
 const {store, persistor} = createPersistStore();
 
