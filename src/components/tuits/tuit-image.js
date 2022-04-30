@@ -2,7 +2,7 @@ import React from "react";
 const TuitImage = ({image, deleteHandler}) => {
   return(
     <>
-      <img src={image}
+      <img data-testid="image-display" src={image}
            className="d-block w-100 align-content-center" alt={"..."}/>
         {
             deleteHandler &&

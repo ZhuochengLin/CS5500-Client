@@ -12,7 +12,7 @@ const CreateTuitComponent = ({tuitText, files, textAreaOnChange, deleteFileHandl
             <div className={"row m-0 align-items-center"}>
                 {profile && <Avatar user={profile}/>}
                 <div className="col-10">
-                        <textarea
+                        <textarea data-testid="tuit-editor"
                             onChange={(e) =>
                                 textAreaOnChange(e)}
                             placeholder="What's happening?"

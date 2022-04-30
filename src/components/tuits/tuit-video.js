@@ -5,7 +5,7 @@ const TuitVideo = ({tuit, deleteHandler}) => {
   return(
       <div className={"col-12 position-relative"}>
           <div id={"iframe-wrapper"} className={"row rounded overflow-hidden bg-black"}>
-              <video width={"560"} height={"315"} controls>
+              <video data-testid="video-display" width={"560"} height={"315"} controls>
                   <source src={tuit.video[0]} type={"video/mp4"}/>
               </video>
           </div>
